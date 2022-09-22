@@ -1,0 +1,29 @@
+@startuml "Diagrama relacional"
+
+entity Producto {
+    id_producto integer <<PK>> 
+    --
+    descripcion varchar(100) <<NN>>
+    categoria varchar(50) <<NN>>
+    stock integer <<NN>>
+    precio_unidad double <<NN>>
+    estado varchar(20) <<NN>>
+    fecha_creación date <<NN>>
+    --
+    id_usuario integer <<NN>> <<FK>>
+}
+
+entity Usuario {
+    id_usuario integer <<PK>> 
+    --
+    nombre varchar(50) <<NN>>
+    apellido varchar(50) <<NN>>
+    email varchar(50) <<NN>> <<UQ>>
+    contraseña varchar(50) <<NN>>
+    estado varchar(20) <<NN>>
+    admin varchar(50) <<NN>>
+}
+
+Producto }|-right-|| Usuario
+
+@enduml

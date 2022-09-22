@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="shortcut icon" href="./images/inventario.png" type="image/png">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-md">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand ">
+                <img src="./images/inventario.png" class="img-fluid img_logo me-1" alt="inventario">
+                <span>INVENTARIOS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarNav" class="collapse navbar-collapse" >
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item pt-2 pe-md-2 pt-md-0 text-center">
+                        <a href="#" class="nav-link active" aria-current="page">
+                            <img src="./images/login.svg" class= "img-fluid me-1" alt="login">
+                            <span class="">Iniciar Sesión</span> 
+                        </a>
+                    </li>
+                    <li class="nav-item pt-2 pt-md-0">
+                        <a href="./registrarse.html" class="nav-link text-center">
+                            <img src="./images/registro.svg" class= "img-fluid me-1" alt="registro">
+                            <span class="">Registrarse</span> 
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main>
+        <div class="container vh-100">
+            <div id="alert-incorrect" class="row mx-auto justify-content-center"> 
+            </div>
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-11 col-sm-9 col-md-7 col-lg-5 col-xl-4">
+                    <div class="card mb-2">
+                        <h5 class="card-header text-white py-3">Iniciar Sesión</h5>
+                        <div class="card-body">
+                            <form id="form-login">
+                                <div class="form-floating mb-2">
+                                    <input type="email" class="form-control" name="inputEmail" id="inputEmail">
+                                    <label for="inputEmail" class="text-muted">Email</label>
+                                </div>
+                                <div class="form-floating mb-4">
+                                    <input type="password" class="form-control" name="inputPassword" id="inputPassword">
+                                    <label for="inputPassword" class="text-muted">Contraseña</label>
+                                </div>
+                                <button id="btn-ingresar" class=" w-100 btn btn-lg text-white fs-6" type="submit">Ingresar
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal">Olvidaste tu contraseña?</a>
+                    <p>No estás registrado? <a href="./registrarse.html" class="text-decoration-none">Crea tu cuenta</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL -> RECUPERAR CONTRASEÑA -->
+    <div id="loginModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-white">Recuperar contraseña</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail" class="form-label">Email registrado</label>
+                            <input type="email" class="form-control" id="exampleInputEmail" placeholder="name@example.com">
+                        </div>
+                        <button type="submit" class="btn text-white">Enviar</button>  
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/index.js"></script> 
+</body>
+</html>

@@ -1,0 +1,30 @@
+[
+    {
+        "id_usuario": 1,
+        "nombre": "Alejandro",
+        "apellidos": "García",
+        "email": "alej45@gmail.com",
+        "contraseña": "Alejandro45",
+        "estado": "activo",
+        "admin": true
+    },
+    {
+        "id_usuario": 2,
+        "nombre": "Martha",
+        "apellidos": "Franco",
+        "email": "marthaf28@gmail.com",
+        "contraseña": "Martha28",
+        "estado": "activo",
+        "admin": false
+    },
+    {
+        "id_usuario": 3,
+        "nombre": "Carlos",
+        "apellidos": "Cordoba",
+        "email": "carlos79@gmail.com",
+        "contraseña": "Carlosc79",
+        "estado": "inactivo",
+        "admin": false
+    }
+]
+

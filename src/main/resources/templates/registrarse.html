@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse</title>
+    <link rel="shortcut icon" href="./images/inventario.png" type="image/png">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/registrarse.css">
+</head>
+<body>
+
+
+    <!-- NAVBAR -->
+    <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-md">
+        <div class="container-fluid">
+            <a href="#" class="navbar-brand ">
+                <img src="./images/inventario.png" class="img-fluid img_logo me-1" alt="inventario">
+                <span>INVENTARIOS</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbarNav" class="collapse navbar-collapse" >
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item pt-2 pe-md-2 pt-md-0 text-center">
+                        <a href="./index.html" class="nav-link ">
+                            <img src="./images/login.svg" class= "img-fluid me-1" alt="login">
+                            <span class="">Iniciar Sesión</span> 
+                        </a>
+                    </li>
+                    <li class="nav-item pt-2 pt-md-0">
+                        <a href="./registrarse.html" class="nav-link active text-center" aria-current="page">
+                            <img src="./images/registro.svg" class= "img-fluid me-1" alt="registro">
+                            <span class="">Registrarse</span> 
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main>
+        <div class="container vh-100">
+            <div id="alert-incorrect" class="row mx-auto justify-content-center">
+            </div>
+                <!-- <div id="alert-correct" class="alert alert-success d-flex align-items-center position-fixed d-none" role="alert">
+                    <svg class="bi flex-shrink-0 me-2 iconos-alertas" role="img" aria-label="Success:"><use href="./images/iconos-alertas.svg#check-circle-fill"/></svg>
+                    <div>
+                      Formulario enviado con éxito.
+                    </div>
+                </div> -->
+                <!-- <div id="alert-incorrect" class="alert alert-danger d-flex align-items-center position-fixed d-none" role="alert">
+                    <svg class="bi flex-shrink-0 me-2 iconos-alertas" role="img" aria-label="Danger:"><use href="./images/iconos-alertas.svg#exclamation-triangle-fill"/></svg>
+                    <div>
+                      Por favor diligencia el formulario correctamente.
+                    </div>
+                </div> -->
+            <div class="row h-100 align-items-center justify-content-center">
+                <div class="col-11 col-sm-9 col-md-8 col-lg-6 pt-3">
+                    <div class="card mb-2">
+                        <h5 class="card-header text-white py-3">Registrarse</h5>
+                        <div class="card-body">
+                            <form id="form-registrarse" class="row" method="post">
+                                <div class="mb-3 col-md-6">
+                                    <label for="inputFirstName" class="form-label">Nombre <span class="text-danger">*</span> </label>
+                                    <input type="text" class="form-control" name="inputFirstName" id="inputFirstName" placeholder="p ej.: Alejandro" aria-describedby="fistNameHelp">
+                                    <div id="fistNameHelp" class="form-text text-danger d-none">El campo nombre solo puede contener letras y espacios.</div>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="inputLastName" class="form-label">Apellidos <span class="text-danger">*</label>
+                                    <input type="text" class="form-control" name="inputLastName" id="inputLastName" placeholder="p ej.: García Torres">
+                                    <div id="lastNameHelp" class="form-text text-danger d-none">El campo apellidos solo puede contener letras y espacios.</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputEmail" class="form-label">Email <span class="text-danger">*</label>
+                                    <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="p ej.: alejandro@example.com">
+                                    <div id="emailHelp" class="form-text text-danger d-none">El campo email debe ser una dirección de correo electrónico válida</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="inputPassword" class="form-label">Contraseña <span class="text-danger">*</label>
+                                    <input type="password" class="form-control" name="inputPassword" id="inputPassword" placeholder="Ingrese una contraseña válida">
+                                    <div id="passwordHelp" class="form-text text-danger d-none">La contraseña debe contener más de 8 caracteres, al menos un dígito, al menos una letra mayúscula y al menos una letra minúscula.</div>
+                                </div>
+                                <div class="checkbox mb-3">
+                                    <label>
+                                        <input type="checkbox" value="accept-terms" name="terminos" id="terminos">
+                                        Acepto términos y condiciones <span class="text-danger">*
+                                    </label>
+                                </div>
+                                <div>
+                                    <button class="w-100 btn btn-lg text-white fs-6" type="submit">Registrarse</button>
+                                </div> 
+                            </form>
+                        </div>
+                    </div>
+                   
+                    <p>Ya tienes cuenta? <a href="./index.html" class="text-decoration-none">Ingresa aquí</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/registrarse.js"></script> 
+</body>
+</html>

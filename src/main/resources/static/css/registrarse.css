@@ -1,0 +1,22 @@
+.img_logo {
+    width: 32px;
+    height: 32px;
+}
+
+.nav-link.active {
+    background-color: #0d6efd;
+    border-radius: 3px;
+}
+
+.card-header, .btn, .modal-header {
+    background-color: #498467;
+}
+
+.alert {
+    z-index: 50;
+}
+
+.iconos-alertas {
+    width: 24px;
+    height: 24px;
+}
