@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Inventario</title>
+    <link rel="shortcut icon" href="./images/inventario.png" type="image/png">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/inicio.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <!-- SIDEBAR -->
+            <div class="col-auto text-white p-0">
+                <div id="sidebarMenu" class="sidebar collapse d-lg-flex flex-column bg-dark text-white min-vh-100 p-3">
+                    <div class="sidebar-header text-center d-flex align-items-center">
+                        <img src="./images/inventario.png" class="img-fluid img_logo me-2" alt="inventario">
+                        <span class=" fw-bolder fs-5">INVENTARIOS</span>
+                    </div>
+                    <hr>
+                    <ul id="menu" class="nav navbar-dark flex-column">
+                        <li class="nav-item">
+                            <a href="./inicio.html" class="nav-link  text-white">
+                                <img src="./images/home.svg" class= "img-fluid img-links me-2" alt="inicio">
+                                <span class="">Inicio</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./productos.html" class="nav-link active text-white" aria-current="page">
+                                <img src="./images/productos.svg" class= "img-fluid img-links me-2" alt="productos">
+                                <span class="">Productos</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="./usuarios.html" class="nav-link text-white">
+                                <img src="./images/usuarios.svg" class= "img-fluid img-links me-2" alt="usuarios">
+                                <span class="">Usuarios</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col p-0 ">
+                <!-- NAVBAR -->
+                <nav class="navbar navbar-dark navbar-top text-white">
+                    <div class="container-fluid justify-content-end align-items-center">
+                        <a class="navbar-brand" href="./index.html">
+                            <img src="./images/logout.svg" class= "img-fluid img-logout" alt="logout">
+                            <span class= "">Salir</span>
+                        </a>
+                        <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                </nav>
+
+                <!-- MAIN -->
+                <main>
+                    
+                </main>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/inicio.js"></script> 
+</body>
+</html>
