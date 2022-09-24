@@ -63,14 +63,112 @@
                     <div class="card card-products mx-auto">
                         <h4 class="card-header card-header-products text-white">Productos</h4>
                         <div class="card-body">
-                          <h5 class="card-title">Special title treatment</h5>
-                          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <div class="row d-flex align-items-center">
+                                <div class="col-12 col-sm-8 col-xl-4 form-group d-flex align-items-center mb-3 mb-sm-4">
+                                    <label for="inputSelect">Mostrar</label>
+                                    <select class="form-select mx-1 w-25" id="inputSelect">
+                                      <option value="1">5</option>
+                                      <option value="2">10</option>
+                                      <option value="3">15</option>
+                                      <option value="4">20</option>
+                                    </select>
+                                    <label for="inputSelect">entradas</label>
+                                </div>
+                                <div class="col-3 col-sm-4 col-xl-4 d-flex align-items-center justify-content-sm-end  justify-content-xl-center mb-4">
+                                    <button type="button" class="btn btn-agregar text-white fs-6">
+                                        <img src="./images/agregar.svg" class= "img-fluid me-1" alt="añadir">
+                                        <span class="d-none d-sm-inline">Agregar</span> 
+                                    </button>
+                                </div>
+                                <div class="col btn-group d-flex mb-4">
+                                    <input id="inputSearch" type="search" class="form-control" placeholder="Buscar" aria-label="Search">
+                                    <button class="btn btn-buscar" type="submit">
+                                        <img src="./images/buscar.svg" class= "img-fluid" alt="buscar">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead class="header-table">
+                                    <tr class="align-middle">
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Categoría</th>
+                                        <th scope="col">Stock</th>
+                                        <th scope="col">Precio x Und</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Fecha creación</th>
+                                        <th scope="col">Acción</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="align-middle">
+                                        <td>1</td>
+                                        <td>Reloj FIBIT Sense blanco</td>
+                                        <td>Tecnología</td>
+                                        <td>45</td>
+                                        <td>916900</td>
+                                        <td>activo</td>
+                                        <td>2022-09-21</td>
+                                        <td>
+                                            <button class="btn btn-editar me-2 mb-2" type="submit">
+                                                <img src="./images/editar.svg" class= "img-fluid" alt="editar">
+                                            </button>
+                                            <button class="btn btn-eliminar mb-2" type="submit">
+                                                <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="align-middle">
+                                        <td>2</td>
+                                        <td>Consola Sony Play Station 4 500GB</td>
+                                        <td>Tecnología</td>
+                                        <td>10</td>
+                                        <td>1759999</td>
+                                        <td>activo</td>
+                                        <td>2022-09-21</td>
+                                        <td>
+                                            <button class="btn btn-editar me-2 mb-2" type="submit">
+                                                <img src="./images/editar.svg" class= "img-fluid" alt="editar">
+                                            </button>
+                                            <button class="btn btn-eliminar mb-2" type="submit">
+                                                <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Audífonos Lenovo Livepods Lp2 Negros</td>
+                                        <td>Tecnología</td>
+                                        <td>15</td>
+                                        <td>101900</td>
+                                        <td>activo</td>
+                                        <td>2022-09-21</td>
+                                        <td>
+                                            <button class="btn btn-editar me-2 mb-2" type="submit">
+                                                <img src="./images/editar.svg" class= "img-fluid" alt="editar">
+                                            </button>
+                                            <button class="btn btn-eliminar mb-2" type="submit">
+                                                <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-between mx-3 mb-3">
-                            <p>Mostrando 1 de 20 entradas</p>
-                            <button type="button" class="btn btn-primary">Primary</button>
+                        <div class="row d-flex align-items-center mx-3 mb-3 mb-md-4">
+                            <p class="col-8 col-sm-10 col-xl-11 text-muted">Mostrando 1 de 20 entradas</p>
+                            <div class="col btn-group align-items-center" role="group">
+                                <button type="button" class="btn btn-outline-secondary btn-prev-next p-1 ">
+                                    <img src="./images/prev.svg" class= "img-fluid" alt="prev">
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-prev-next p-1 ">
+                                    <img src="./images/next.svg" class= "img-fluid" alt="next">
+                                </button>
+                            </div>
                         </div>
-                          
                         
                     </div>
                 </main>

@@ -1,8 +1,32 @@
 .card-products {
     width: 90%;
-    margin-top: 7rem;
+    margin-top: 5rem;
 }
 
 .card-header-products {
     background-color: #CB904D;
+}
+
+.btn-agregar{
+    background-color: #4A7C59;
+}
+
+.btn-buscar {
+    background-color: #757575;
+}
+
+.header-table  {
+    background-color: #BDBDBD;
+}
+
+.btn-editar {
+    background-color: #3943B7;
+}
+
+.btn-eliminar {
+    background-color: #D00000;
+}
+
+.btn-prev-next {
+    background-color: #E0E0E0;
 }
