@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Inventario</title>
+    <link rel="shortcut icon" href="./images/inventario.png" type="image/png">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/templateApp.css">
+    <link rel="stylesheet" href="./css/productos.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <!-- SIDEBAR -->
+            <div class="col-auto text-white p-0">
+                <div id="sidebarMenu" class="sidebar collapse d-lg-flex flex-column bg-dark text-white min-vh-100 p-3">
+                    <div class="sidebar-header text-center d-flex align-items-center">
+                        <img src="./images/inventario.png" class="img-fluid img_logo me-2" alt="inventario">
+                        <span class=" fw-bolder fs-5">INVENTARIOS</span>
+                    </div>
+                    <hr>
+                    <ul id="menu" class="nav navbar-dark flex-column">
+                        <li class="nav-item">
+                            <a href="./inicio.html" class="nav-link  text-white">
+                                <img src="./images/home.svg" class= "img-fluid img-links me-2" alt="inicio">
+                                <span class="">Inicio</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./productos.html" class="nav-link active text-white" aria-current="page">
+                                <img src="./images/productos.svg" class= "img-fluid img-links me-2" alt="productos">
+                                <span class="">Productos</span> 
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="./usuarios.html" class="nav-link text-white">
+                                <img src="./images/usuarios.svg" class= "img-fluid img-links me-2" alt="usuarios">
+                                <span class="">Usuarios</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col p-0 ">
+                <!-- NAVBAR -->
+                <nav class="navbar navbar-dark navbar-top text-white">
+                    <div class="container-fluid justify-content-end align-items-center">
+                        <a class="navbar-brand" href="./index.html">
+                            <img src="./images/logout.svg" class= "img-fluid img-logout" alt="logout">
+                            <span class= "">Salir</span>
+                        </a>
+                        <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                </nav>
+
+                <!-- MAIN -->
+                <main>
+                    <div class="card card-products mx-auto">
+                        <h4 class="card-header card-header-products text-white">Productos</h4>
+                        <div class="card-body">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-12 col-sm-8 col-xl-4 form-group d-flex align-items-center mb-3 mb-sm-4">
+                                    <label for="inputSelect">Mostrar</label>
+                                    <select class="form-select mx-1 w-25" id="inputSelect">
+                                      <option value="1">5</option>
+                                      <option value="2">10</option>
+                                      <option value="3">15</option>
+                                      <option value="4">20</option>
+                                    </select>
+                                    <label for="inputSelect">entradas</label>
+                                </div>
+                                <div class="col-3 col-sm-4 col-xl-4 d-flex align-items-center justify-content-sm-end  justify-content-xl-center mb-4">
+                                    <button type="button" class="btn btn-agregar text-white fs-6">
+                                        <img src="./images/agregar.svg" class= "img-fluid me-1" alt="añadir">
+                                        <span class="d-none d-sm-inline">Agregar</span> 
+                                    </button>
+                                </div>
+                                <div class="col btn-group d-flex mb-4">
+                                    <input id="inputSearch" type="search" class="form-control" placeholder="Buscar" aria-label="Search">
+                                    <button class="btn btn-buscar" type="submit">
+                                        <img src="./images/buscar.svg" class= "img-fluid" alt="buscar">
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead class="header-table">
+                                    <tr class="align-middle">
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col">Categoría</th>
+                                        <th scope="col">Stock</th>
+                                        <th scope="col">Precio x Und</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Fecha creación</th>
+                                        <th scope="col">Acción</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="align-middle">
+                                        <td>1</td>
+                                        <td>Reloj FIBIT Sense blanco</td>
+                                        <td>Tecnología</td>
+                                        <td>45</td>
+                                        <td>916900</td>
+                                        <td>activo</td>
+                                        <td>2022-09-21</td>
+                                        <td>
+                                            <button class="btn btn-editar me-2 mb-2" type="submit">
+                                                <img src="./images/editar.svg" class= "img-fluid" alt="editar">
+                                            </button>
+                                            <button class="btn btn-eliminar mb-2" type="submit">
+                                                <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr class="align-middle">
+                                        <td>2</td>
+                                        <td>Consola Sony Play Station 4 500GB</td>
+                                        <td>Tecnología</td>
+                                        <td>10</td>
+                                        <td>1759999</td>
+                                        <td>activo</td>
+                                        <td>2022-09-21</td>
+                                        <td>
+                                            <button class="btn btn-editar me-2 mb-2" type="submit">
+                                                <img src="./images/editar.svg" class= "img-fluid" alt="editar">
+                                            </button>
+                                            <button class="btn btn-eliminar mb-2" type="submit">
+                                                <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Audífonos Lenovo Livepods Lp2 Negros</td>
+                                        <td>Tecnología</td>
+                                        <td>15</td>
+                                        <td>101900</td>
+                                        <td>activo</td>
+                                        <td>2022-09-21</td>
+                                        <td>
+                                            <button class="btn btn-editar me-2 mb-2" type="submit">
+                                                <img src="./images/editar.svg" class= "img-fluid" alt="editar">
+                                            </button>
+                                            <button class="btn btn-eliminar mb-2" type="submit">
+                                                <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row d-flex align-items-center mx-3 mb-3 mb-md-4">
+                            <p class="col-8 col-sm-10 col-xl-11 text-muted">Mostrando 1 de 20 entradas</p>
+                            <div class="col btn-group align-items-center" role="group">
+                                <button type="button" class="btn btn-outline-secondary btn-prev-next p-1 ">
+                                    <img src="./images/prev.svg" class= "img-fluid" alt="prev">
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary btn-prev-next p-1 ">
+                                    <img src="./images/next.svg" class= "img-fluid" alt="next">
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </main>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/productos.js"></script> 
+</body>
+</html>
