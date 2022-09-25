@@ -1,15 +1,14 @@
-// package co.edu.utp.misiontic.equipo8.inventario.controller;
+package co.edu.utp.misiontic.equipo8.inventario.controller;
 
-// import org.springframework.stereotype.Controller;
-// import org.springframework.ui.Model;
-// import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
-
-// @Controller
-// public class InventarioController {
+@Controller
+public class InventarioController {
     
-//     // @GetMapping("/index.html")
-//     // public String goToIndex(Model model) {
-//     //     return "index";
-//     // }
-// }
+    @GetMapping("/registrarse")
+    public String goToRegister(Model model) {
+        return "registrarse";
+    }
+}
