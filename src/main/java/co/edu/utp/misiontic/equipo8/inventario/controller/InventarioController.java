@@ -11,4 +11,10 @@ public class InventarioController {
     public String goToRegister(Model model) {
         return "registrarse";
     }
+
+    @GetMapping("/inicio")
+    public String goToHome(Model model) {
+        return "inicio";
+    }
+
 }
