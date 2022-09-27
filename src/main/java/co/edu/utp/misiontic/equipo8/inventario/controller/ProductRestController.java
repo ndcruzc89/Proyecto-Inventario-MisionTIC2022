@@ -7,26 +7,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.utp.misiontic.equipo8.inventario.controller.dto.LoginRequest;
-import co.edu.utp.misiontic.equipo8.inventario.service.UserService;
+import co.edu.utp.misiontic.equipo8.inventario.controller.dto.ProductRequest;
+import co.edu.utp.misiontic.equipo8.inventario.service.ProductService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/login")
-public class LoginRestController {
-    
-    private final UserService userService;
-    
+@RequestMapping("api/product")
+public class ProductRestController {
+
+    private ProductService productService;
+
     @PostMapping
-    public ResponseEntity<?> login(@RequestBody LoginRequest user) {
+    public ResponseEntity<?> AddProduct(@RequestBody ProductRequest product) {
         try {
-            var response = userService.validateUser(user.getEmail(), user.getPassword());
+            var response = productService.createProduct(product);
             return ResponseEntity.ok(response);
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ex.getMessage());
         }
     }
-
 }

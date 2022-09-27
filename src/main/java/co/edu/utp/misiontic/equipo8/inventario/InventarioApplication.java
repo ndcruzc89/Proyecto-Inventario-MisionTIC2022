@@ -30,10 +30,10 @@ public class InventarioApplication {
 			
 		}
 
-		private void loadUsers() {
-			userRepository.save(new User(1, "Alejandro", "García",
-					"alej45@gmail.com","Alejandro45", true, true));
-		}
+		// private void loadUsers() {
+		// 	userRepository.save(new User(0,"Alejandro", "García",
+		// 			"alej45@gmail.com","Alejandro45", true, true));
+		// }
 
 		
 	}

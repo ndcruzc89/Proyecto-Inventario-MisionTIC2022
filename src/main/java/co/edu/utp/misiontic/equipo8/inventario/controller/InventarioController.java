@@ -17,4 +17,9 @@ public class InventarioController {
         return "inicio";
     }
 
+    @GetMapping("productos")
+    public String goToProducts(Model model) {
+        return "productos";
+    }
+
 }
