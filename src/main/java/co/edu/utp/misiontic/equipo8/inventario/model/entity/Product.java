@@ -36,14 +36,14 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
 
-    @Column(name = "precio x und", nullable = false)
+    @Column(name = "precio_unidad", nullable = false)
     private Double price_unit;
 
     @Column(name = "activo", nullable = false)
     private Boolean active;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "fecha creacion", nullable = false)
+    @Column(name = "fecha_creacion", nullable = false)
     private Date date_creation;
 
     @ManyToOne

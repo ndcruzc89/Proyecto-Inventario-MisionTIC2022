@@ -1,5 +1,8 @@
 package co.edu.utp.misiontic.equipo8.inventario.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import co.edu.utp.misiontic.equipo8.inventario.controller.dto.ProductRequest;
@@ -14,10 +17,24 @@ import lombok.AllArgsConstructor;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    
+
     @Override
-    public ProductResponse createProduct(ProductRequest product) {
-        
+    public List<ProductResponse> getAllProducts() {
+        return productRepository.findAll().stream()
+                .map(product -> ProductResponse.builder()
+                        .id(product.getId())
+                        .description(product.getDescription())
+                        .category(product.getCategory())
+                        .stock(product.getStock())
+                        .price_unit(product.getPrice_unit())
+                        .active(product.getActive())
+                        .date_creation(product.getDate_creation())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void createProduct(ProductRequest product) {
         var productOp = productRepository.findByDescription(product.getDescription()); 
         if(productOp.isPresent()){
             throw new RuntimeException("El producto ya existe");
@@ -29,32 +46,39 @@ public class ProductServiceImpl implements ProductService {
         productDb.setStock(product.getStock());
         productDb.setPrice_unit(product.getPrice_unit());
         productDb.setActive(product.getActive());
+        System.out.println(productDb);
         productDb.setDate_creation(product.getDate_creation());
-        productDb = productRepository.save(productDb);
-
-        // var userOp = userRepository.findById(username)
-
-        return ProductResponse.builder()
-            .id(productDb.getId())
-            .description(productDb.getDescription())
-            .category(productDb.getCategory())
-            .stock(productDb.getStock())
-            .price_unit(productDb.getPrice_unit())
-            .active(productDb.getActive())
-            .date_creation(productDb.getDate_creation())
-            .build();
+        productRepository.save(productDb);        
     }
 
     @Override
-    public ProductResponse updateUser(ProductRequest product) {
-        // TODO Auto-generated method stub
-        return null;
+    public void updateProduct(ProductRequest product) {
+        var productOp = productRepository.findById(product.getId());
+        var productDescr = productRepository.findByDescription(product.getDescription()); 
+        if (productDescr.get().getId() != productOp.get().getId()) {
+            throw new RuntimeException("El producto ya existe");
+        }
+        var productDb = productOp.get();
+        productDb.setDescription(product.getDescription());
+        productDb.setCategory(product.getCategory());
+        productDb.setStock(product.getStock());
+        productDb.setPrice_unit(product.getPrice_unit());
+        productDb.setActive(product.getActive());
+        productDb.setDate_creation(product.getDate_creation());
+        productRepository.save(productDb); 
     }
 
     @Override
-    public ProductRequest deleteUser(Integer id) {
-        // TODO Auto-generated method stub
-        return null;
+    public void deleteProduct(Integer id) {
+        var productOp = productRepository.findById(id);
+        if (productOp.isEmpty()) {
+            throw new RuntimeException("El producto no existe");
+        }
+        
+        productRepository.delete(productOp.get());
+        
     }
+    
+    
     
 }

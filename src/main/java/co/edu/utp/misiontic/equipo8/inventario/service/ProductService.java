@@ -1,12 +1,17 @@
 package co.edu.utp.misiontic.equipo8.inventario.service;
 
+import java.util.List;
+
 import co.edu.utp.misiontic.equipo8.inventario.controller.dto.ProductRequest;
 import co.edu.utp.misiontic.equipo8.inventario.controller.dto.ProductResponse;
 
 public interface ProductService {
-    ProductResponse createProduct(ProductRequest product);
 
-    ProductResponse updateUser(ProductRequest product);
+    List<ProductResponse> getAllProducts();
 
-    ProductRequest deleteUser(Integer id);
+    void createProduct(ProductRequest product);
+
+    void updateProduct(ProductRequest product);
+
+    void deleteProduct(Integer id);
 }
