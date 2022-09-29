@@ -1,10 +1,14 @@
 package co.edu.utp.misiontic.equipo8.inventario.model.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Integer id;
 
@@ -34,9 +38,12 @@ public class User {
     @Column(name = "contrasena", nullable = false, length = 50)
     private String password;
 
-    @Column(name = "activo", nullable = false, length = 20)
+    @Column(name = "activo", nullable = false)
     private Boolean active;
 
     @Column(name = "administrador", nullable = false, length = 20)
     private Boolean admin;
+
+    @OneToMany(mappedBy = "user")
+    private List<Product> products;
 }

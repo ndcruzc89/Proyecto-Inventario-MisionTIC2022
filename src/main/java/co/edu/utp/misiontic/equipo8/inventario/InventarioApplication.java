@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
-import co.edu.utp.misiontic.equipo8.inventario.model.entity.User;
+// import co.edu.utp.misiontic.equipo8.inventario.model.entity.User;
 import co.edu.utp.misiontic.equipo8.inventario.model.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,10 +30,10 @@ public class InventarioApplication {
 			
 		}
 
-		private void loadUsers() {
-			userRepository.save(new User(1, "Alejandro", "García",
-					"alej45@gmail.com","Alejandro45", true, true));
-		}
+		// private void loadUsers() {
+		// 	userRepository.save(new User(0,"Alejandro", "García",
+		// 			"alej45@gmail.com","Alejandro45", true, true));
+		// }
 
 		
 	}

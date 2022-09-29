@@ -16,12 +16,12 @@ import lombok.AllArgsConstructor;
 @RequestMapping("api/login")
 public class LoginRestController {
     
-    private final UserService securityService;
+    private final UserService userService;
     
     @PostMapping
     public ResponseEntity<?> login(@RequestBody LoginRequest user) {
         try {
-            var response = securityService.validateUser(user.getEmail(), user.getPassword());
+            var response = userService.validateUser(user.getEmail(), user.getPassword());
             return ResponseEntity.ok(response);
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
