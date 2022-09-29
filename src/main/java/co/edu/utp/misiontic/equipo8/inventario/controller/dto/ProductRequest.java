@@ -17,4 +17,6 @@ public class ProductRequest {
     
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date_creation;
+
+    private Integer userId;
 }

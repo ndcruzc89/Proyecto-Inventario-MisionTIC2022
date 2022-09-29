@@ -9,9 +9,13 @@ public interface ProductService {
 
     List<ProductResponse> getAllProducts();
 
-    void createProduct(ProductRequest product);
+    ProductResponse getKeywordResult(String keyword);
+    
+    ProductResponse getProductById(Integer id);
 
-    void updateProduct(ProductRequest product);
+    ProductResponse createProduct(ProductRequest product);
+
+    ProductResponse updateProduct(ProductRequest product);
 
     void deleteProduct(Integer id);
 }

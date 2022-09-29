@@ -22,18 +22,22 @@ public class ProductRestController {
 
     private ProductService productService;
 
-    // @GetMapping("/{id}") 
-    // public ResponseEntity<?> searchProduct(@PathVariable("id") String id) {
-    //     var response = productService.getMovieById(id);
-    //     return ResponseEntity.ok().body(response);
-    // }
+    @GetMapping
+    public ResponseEntity<?> listProducts() {
+        var response = productService.getAllProducts();
+        return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/{keyword}")
+    public ResponseEntity<?> searchKeyword(@PathVariable("keyword") String keyword) {
+        var response = productService.getKeywordResult(keyword);
+        return ResponseEntity.ok().body(response);
+    }
 
     @PostMapping
     public ResponseEntity<?> addProduct(@RequestBody ProductRequest product) {
         try {
-            productService.createProduct(product);
-            var response = productService.getAllProducts();
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok().body(productService.createProduct(product));
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ex.getMessage());
@@ -43,9 +47,7 @@ public class ProductRestController {
     @PutMapping
     public ResponseEntity<?> editProduct(@RequestBody ProductRequest product) {
         try {
-            productService.updateProduct(product);
-            var response = productService.getAllProducts();
-            return ResponseEntity.ok(response);
+            return ResponseEntity.ok().body(productService.updateProduct(product));
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ex.getMessage());
@@ -56,8 +58,7 @@ public class ProductRestController {
     public ResponseEntity<?> removeProduct(@PathVariable("id") Integer id) {
         try {
             productService.deleteProduct(id);
-            var response = productService.getAllProducts();
-            return ResponseEntity.ok(response);
+            return ResponseEntity.status(HttpStatus.OK).body("Deleted");
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ex.getMessage());
