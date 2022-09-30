@@ -66,7 +66,7 @@
                             <div class="row d-flex align-items-center">
                                 <div class="col-12 col-sm-8 col-xl-4 form-group d-flex align-items-center mb-3 mb-sm-4">
                                     <label for="inputSelect">Mostrar</label>
-                                    <select class="form-select mx-1 w-25" id="inputSelect">
+                                    <select id="inputSelect" class="form-select mx-1 w-25" >
                                       <option value="1">5</option>
                                       <option value="2">10</option>
                                       <option value="3">15</option>
@@ -75,7 +75,7 @@
                                     <label for="inputSelect">entradas</label>
                                 </div>
                                 <div class="col-3 col-sm-4 col-xl-4 d-flex align-items-center justify-content-sm-end  justify-content-xl-center mb-4">
-                                    <button id="add-btn" type="button" class="btn btn-agregar text-white fs-6">
+                                    <button id="add-btn" class="btn btn-agregar text-white fs-6" type="button"  data-bs-toggle="modal" data-bs-target="#AddProductModal">
                                         <img src="./images/agregar.svg" class= "img-fluid me-1" alt="añadir">
                                         <span class="d-none d-sm-inline">Agregar</span> 
                                     </button>
@@ -97,63 +97,12 @@
                                         <th scope="col">Categoría</th>
                                         <th scope="col">Stock</th>
                                         <th scope="col">Precio x Und</th>
-                                        <th scope="col">Estado</th>
+                                        <th scope="col">Activo</th>
                                         <th scope="col">Fecha creación</th>
                                         <th scope="col">Acción</th>
                                     </tr>
                                     </thead>
                                     <tbody id="body-table">
-                                    <!-- <tr class="align-middle">
-                                        <td>1</td>
-                                        <td>Reloj FIBIT Sense blanco</td>
-                                        <td>Tecnología</td>
-                                        <td>45</td>
-                                        <td>916900</td>
-                                        <td>activo</td>
-                                        <td>2022-09-21</td>
-                                        <td>
-                                            <button id="edit-btn" class="btn btn-editar me-2 mb-2" type="submit">
-                                                <img src="./images/editar.svg" class= "img-fluid" alt="editar">
-                                            </button>
-                                            <button id="delete-btn" class="btn btn-eliminar mb-2" type="submit">
-                                                <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr class="align-middle">
-                                        <td>2</td>
-                                        <td>Consola Sony Play Station 4 500GB</td>
-                                        <td>Tecnología</td>
-                                        <td>10</td>
-                                        <td>1759999</td>
-                                        <td>activo</td>
-                                        <td>2022-09-21</td>
-                                        <td>
-                                            <button class="btn btn-editar me-2 mb-2" type="submit">
-                                                <img src="./images/editar.svg" class= "img-fluid" alt="editar">
-                                            </button>
-                                            <button class="btn btn-eliminar mb-2" type="submit">
-                                                <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Audífonos Lenovo Livepods Lp2 Negros</td>
-                                        <td>Tecnología</td>
-                                        <td>15</td>
-                                        <td>101900</td>
-                                        <td>activo</td>
-                                        <td>2022-09-21</td>
-                                        <td>
-                                            <button class="btn btn-editar me-2 mb-2" type="submit">
-                                                <img src="./images/editar.svg" class= "img-fluid" alt="editar">
-                                            </button>
-                                            <button class="btn btn-eliminar mb-2" type="submit">
-                                                <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
-                                            </button>
-                                        </td>
-                                    </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -172,6 +121,55 @@
                         
                     </div>
                 </main>
+
+                <!-- MODAL -> Agregar Producto-->
+                <div id="AddProductModal" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-white">Agregar Producto</h5>
+                                <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="form-agregarProducto"class="row">
+                                    <div class="mb-3 col-12">
+                                        <label for="inputDescription" class="form-label">Descripción <span class="text-danger">*</span> </label>
+                                        <input id="inputDescription" name="inputDescription" class="form-control" type="text" placeholder="p ej.: Iphone 13 Pro " aria-describedby="descriptionHelp">
+                                    </div>
+                                    <div class="mb-3 col-12">
+                                        <label for="inputCategory" class="form-label">Categoría <span class="text-danger">*</span> </label>
+                                        <input id="inputCategory" name="inputCategory" class="form-control" type="text" placeholder="p ej.: Tecnología " aria-describedby="categoryHelp">
+                                        <div id="categoryHelp" class="form-text text-danger d-none">El campo solo puede contener letras y espacios.</div>
+                                    </div>
+                                    <div class="mb-3 col-4">
+                                        <label for="inputStock" class="form-label">Stock <span class="text-danger">*</span> </label>
+                                        <input id="inputStock" name="inputStock" class="form-control" type="number" placeholder="p ej.: 12" aria-describedby="stockHelp">
+                                        <div id="stockHelp" class="form-text text-danger d-none">El campo solo puede contener números.</div>
+                                    </div>
+                                    <div class="mb-3 col-8">
+                                        <label for="inputPrice" class="form-label">Precio x Unidad <span class="text-danger">*</span> </label>
+                                        <input id="inputPrice" name="inputPrice" class="form-control" type="number" placeholder="p ej.: 5448900" aria-describedby="priceHelp">
+                                        <div id="priceHelp" class="form-text text-danger d-none">El campo solo puede contener números.</div>
+                                    </div>
+                                    <div class="mb-4 col-4">
+                                        <label class="mb-2" for="inputActive">Activo <span class="text-danger">*</span></label>
+                                        <select id="inputActive" class="form-select" >
+                                          <option value="1">True</option>
+                                          <option value="2">False</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-4 col-8">
+                                        <label class="d-block mb-2" for="inputCreationDate">Fecha de creación: <span class="text-danger">*</span></label>
+                                        <input  id="inputCreationDate" name="inputCreationDate" class="form-control" type="date" placeholder="p ej.: 2022/09/29">
+                                    </div>
+                                    <div class="text-center">
+                                        <button id="btn-addProduct" class="text-white" type="submit">Enviar</button>  
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

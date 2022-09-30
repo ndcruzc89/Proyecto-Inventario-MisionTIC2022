@@ -7,7 +7,7 @@
     background-color: #CB904D;
 }
 
-.btn-agregar{
+.btn-agregar, .modal-header, #btn-addProduct {
     background-color: #4A7C59;
 }
 
@@ -30,3 +30,4 @@
 .btn-prev-next {
     background-color: #E0E0E0;
 }
+
