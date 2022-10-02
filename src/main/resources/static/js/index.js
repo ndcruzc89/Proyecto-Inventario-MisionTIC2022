@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 "Content-Type": "application/json"
             }
         });
+
+        console.log(JSON.stringify(bodyObject))
     
         if (response.ok) {
             const user = await response.json();

@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
         
         var user = userOp.get();
         return UserResponse.builder()
+                .id(user.getId())
                 .name(user.getName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())

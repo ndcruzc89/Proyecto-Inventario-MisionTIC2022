@@ -75,14 +75,15 @@
                                     <label for="inputSelect">entradas</label>
                                 </div>
                                 <div class="col-3 col-sm-4 col-xl-4 d-flex align-items-center justify-content-sm-end  justify-content-xl-center mb-4">
-                                    <button id="add-btn" class="btn btn-agregar text-white fs-6" type="button"  data-bs-toggle="modal" data-bs-target="#AddProductModal">
+                                    <!-- <button id="btnOpenAdd" class="btn btn-agregar text-white fs-6" type="button"  data-bs-toggle="modal" data-bs-target="#productModal"> -->
+                                    <button id="btnOpenAdd" class="btnOpenAdd btn btn-agregar text-white fs-6" type="button" data-backdrop="false">
                                         <img src="./images/agregar.svg" class= "img-fluid me-1" alt="añadir">
                                         <span class="d-none d-sm-inline">Agregar</span> 
                                     </button>
                                 </div>
                                 <div class="col btn-group d-flex mb-4">
                                     <input id="inputSearch" type="search" class="form-control" placeholder="Buscar" aria-label="Search">
-                                    <button class="btn btn-buscar" type="submit">
+                                    <button class="btn btnSearch" type="submit">
                                         <img src="./images/buscar.svg" class= "img-fluid" alt="buscar">
                                     </button>
                                 </div>
@@ -123,47 +124,53 @@
                 </main>
 
                 <!-- MODAL -> Agregar Producto-->
-                <div id="AddProductModal" class="modal">
+                <div id="productModal" class="modal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title text-white">Agregar Producto</h5>
+                                <h5 id="modal-title" class="modal-title text-white"></h5>
                                 <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <!-- <button id="btnClose" class="btn-close btn-close-white" type="button"></button> -->
                             </div>
+                            <div id="alert-incorrect"></div>
                             <div class="modal-body">
-                                <form id="form-agregarProducto"class="row">
+                                <form id="form-producto"class="row">
                                     <div class="mb-3 col-12">
                                         <label for="inputDescription" class="form-label">Descripción <span class="text-danger">*</span> </label>
-                                        <input id="inputDescription" name="inputDescription" class="form-control" type="text" placeholder="p ej.: Iphone 13 Pro " aria-describedby="descriptionHelp">
+                                        <input id="inputDescription" name="inputDescription" class="form-control input" type="text" placeholder="p ej.: Iphone 13 Pro" aria-describedby="descriptionHelp">
+                                        <div id="descriptionHelp" class="form-text text-danger d-none">El campo solo puede contener letras (con o sin acentos), números, espacios y guiones</div>
                                     </div>
                                     <div class="mb-3 col-12">
                                         <label for="inputCategory" class="form-label">Categoría <span class="text-danger">*</span> </label>
-                                        <input id="inputCategory" name="inputCategory" class="form-control" type="text" placeholder="p ej.: Tecnología " aria-describedby="categoryHelp">
+                                        <input id="inputCategory" name="inputCategory" class="form-control input" type="text" placeholder="p ej.: Tecnología " aria-describedby="categoryHelp">
                                         <div id="categoryHelp" class="form-text text-danger d-none">El campo solo puede contener letras y espacios.</div>
                                     </div>
                                     <div class="mb-3 col-4">
                                         <label for="inputStock" class="form-label">Stock <span class="text-danger">*</span> </label>
-                                        <input id="inputStock" name="inputStock" class="form-control" type="number" placeholder="p ej.: 12" aria-describedby="stockHelp">
+                                        <input id="inputStock" name="inputStock" class="form-control input" type="number" placeholder="p ej.: 12" aria-describedby="stockHelp">
                                         <div id="stockHelp" class="form-text text-danger d-none">El campo solo puede contener números.</div>
                                     </div>
                                     <div class="mb-3 col-8">
                                         <label for="inputPrice" class="form-label">Precio x Unidad <span class="text-danger">*</span> </label>
-                                        <input id="inputPrice" name="inputPrice" class="form-control" type="number" placeholder="p ej.: 5448900" aria-describedby="priceHelp">
-                                        <div id="priceHelp" class="form-text text-danger d-none">El campo solo puede contener números.</div>
+                                        <input id="inputPrice" name="inputPrice" class="form-control input" type="number" placeholder="p ej.: 5448900" aria-describedby="priceHelp">
+                                        <div id="priceHelp" class="form-text text-danger d-none">El campo solo puede contener números o la coma en caso de usar decimales.</div>
                                     </div>
                                     <div class="mb-4 col-4">
                                         <label class="mb-2" for="inputActive">Activo <span class="text-danger">*</span></label>
-                                        <select id="inputActive" class="form-select" >
+                                        <select id="inputActive" name="inputActive" class="form-select input" >
+                                          <option selected>Selecciona una opción</option>
                                           <option value="1">True</option>
                                           <option value="2">False</option>
                                         </select>
+                                        <div id="activeHelp" class="form-text text-danger d-none">Seleccione una de las opciones.</div>
                                     </div>
                                     <div class="mb-4 col-8">
                                         <label class="d-block mb-2" for="inputCreationDate">Fecha de creación: <span class="text-danger">*</span></label>
-                                        <input  id="inputCreationDate" name="inputCreationDate" class="form-control" type="date" placeholder="p ej.: 2022/09/29">
+                                        <input  id="inputCreationDate" name="inputCreationDate" class="form-control input" type="date" placeholder="p ej.: 2022/09/29">
+                                        <div id="creationDateHelp" class="form-text text-danger d-none">Este campo no puede estar vacío, debe contener una fecha válida.</div>
                                     </div>
-                                    <div class="text-center">
-                                        <button id="btn-addProduct" class="text-white" type="submit">Enviar</button>  
+                                    <div id="submitProduct" class="text-center">
+                                        <!-- <button id="${modalButton}" class="btn text-white" type="submit">Enviar</button> -->
                                     </div>
                                 </form>
                             </div>
