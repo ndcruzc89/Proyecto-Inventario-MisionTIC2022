@@ -123,7 +123,7 @@
                     </div>
                 </main>
 
-                <!-- MODAL -> Agregar Producto-->
+                <!-- MODAL -> Agregar y editar Producto-->
                 <div id="productModal" class="modal">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -132,7 +132,6 @@
                                 <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                                 <!-- <button id="btnClose" class="btn-close btn-close-white" type="button"></button> -->
                             </div>
-                            <div id="alert-incorrect"></div>
                             <div class="modal-body">
                                 <form id="form-producto"class="row">
                                     <div class="mb-3 col-12">
@@ -177,6 +176,30 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- MODAL -> Modal para eliminar el Producto-->
+                <div id="deleteModal" class="modal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">
+                            <svg class="bi flex-shrink-0 me-2 iconos-alertas triangle-fill" role="img" aria-label="Danger:"><use href="./images/iconos-alertas.svg#exclamation-triangle-fill"/></svg>
+                          </h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Esta seguro de eliminar el registro de producto seleccionado?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
+                          <button id="btnDeleteProduct" type="button" class="btn btn-danger">Eliminar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                <div id="alert-message" class="center-block"></div>
+
             </div>
 
         </div>
