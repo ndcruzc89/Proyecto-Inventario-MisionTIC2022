@@ -1,11 +1,9 @@
 package co.edu.utp.misiontic.equipo8.inventario.controller.dto;
 
-import lombok.Builder;
 import lombok.Data;
 
-@Builder
 @Data
-public class UserResponse {
+public class UserRequest {
     private Integer id;
     private String name;
     private String lastName;

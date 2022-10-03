@@ -1,12 +1,9 @@
 package co.edu.utp.misiontic.equipo8.inventario.model.repository;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import co.edu.utp.misiontic.equipo8.inventario.controller.dto.ProductResponse;
 import co.edu.utp.misiontic.equipo8.inventario.model.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {

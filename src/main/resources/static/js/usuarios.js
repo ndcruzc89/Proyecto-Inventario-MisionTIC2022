@@ -3,28 +3,28 @@ document.addEventListener('DOMContentLoaded', (e) => {
     /* ******************************************************************** */
     /* *** Añadir Lista de Productos ************************************** */
 
-    const getToListProducts = () => {
-        fetch('/api/product')
+    const getToListUsers = () => {
+        fetch('/api/user')
         .then(response => response.json())
         .then(data => {
-            addProducts(data);
+            addUsers(data);
         });
     }
 
-    const addProducts = (data) => {
+    const addUsers = (data) => {
         const bodyTable = document.getElementById("body-table");
         bodyTable.innerText = "";
-        data.map(({id, description, category, stock, price_unit, active, date_creation}) => {
+        data.map(({id, name, lastName, email, password, admin, active}) => {
 
         let rowTable = [
-        `<tr id="productRow${id}" class="align-middle">
+        `<tr id="userRow${id}" class="align-middle">
             <td>${id}</td>
-            <td>${description}</td>
-            <td>${category}</td>
-            <td>${stock}</td>
-            <td>${price_unit}</td>
+            <td>${name}</td>
+            <td>${lastName}</td>
+            <td>${email}</td>
+            <td class="d-none">${password}</td>
+            <td>${admin}</td>
             <td>${active}</td>
-            <td>${date_creation}</td>
             <td>
                 <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
                     <img src="./images/editar.svg" class= "img-fluid" alt="editar">
@@ -40,64 +40,61 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     }
 
-    getToListProducts();
+    getToListUsers();
 
 
     /* ******************************************************************** */
     /* *** Validar Formulario ********************************************* */
-    const inputs = document.querySelectorAll('#form-producto .input');
-    const user = JSON.parse(localStorage.getItem("loggedUser"));
+    const inputs = document.querySelectorAll('#form-usuario .input');
+    // const user = JSON.parse(localStorage.getItem("loggedUser"));
 
     const expressions = {
-        description: /^[a-zA-ZÀ-ÿ\s0-9\-]{1,40}$/, // Letras (pueden llevar acentos), números, espacios y guiones
         text: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-        number: /^[0-9]+$/, // Solo números,
-        price: /^[0-9]+([.])?([0-9]+)?$/,
-        active: /[1-2]/,
-        date: /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/
+        email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+        password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/, // La contraseña debe tener al entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula y al menos una mayúscula.
+        active: /[1-2]/
     };
 
     const fieldState = {
-        inputDescription: false,
-        inputCategory: false,
-        inputStock: false,
-        inputPrice: false,
-        inputActive: false,
-        inputCreationDate: false
+        inputName: false,
+        inputLastName: false,
+        inputEmail: false,
+        inputPassword: false,
+        inputAdmin: false,
+        inputActive: false
     };
 
     const fieldValue = {
         "id": null,
-        "description": null,
-        "category": null,
-        "stock": null,
-        "price_unit": null,
-        "active": null,
-        "date_creation": null,
-        "userId": user["id"]
+        "name": null,
+        "lastName": null,
+        "email": null,
+        "password": null,
+        "admin": null,
+        "active": null
     }
 
-    
 
     const validateForm = (e) => {
+        console.log(e.target.name)
         switch (e.target.name) {
-            case "inputDescription":
-                validateField(expressions.description, e.target, 'inputDescription', 'descriptionHelp','description');
+            case "inputName":
+                validateField(expressions.text, e.target, 'inputName', 'nameHelp','name');
                 break;
-            case "inputCategory":
-                validateField(expressions.text, e.target, 'inputCategory', 'categoryHelp', 'category');
+            case "inputLastName":
+                validateField(expressions.text, e.target, 'inputLastName', 'lastNameHelp', 'lastName');
                 break;
-            case "inputStock":
-                validateField(expressions.number, e.target, 'inputStock', 'stockHelp', 'stock');
+            case "inputEmail":
+                validateField(expressions.email, e.target, 'inputEmail', 'emailHelp', 'email');
                 break;
-            case "inputPrice":
-                validateField(expressions.price, e.target, 'inputPrice', 'priceHelp', 'price_unit');
+            case "inputPassword":
+                validateField(expressions.password, e.target, 'inputPassword', 'passwordHelp', 'password');
+                break;
+            case "inputAdmin":
+                validateField(expressions.active, e.target, 'inputAdmin', 'adminHelp', 'admin');
                 break;
             case "inputActive":
                 validateField(expressions.active, e.target, 'inputActive', 'activeHelp', 'active');
-                break;
-            case "inputCreationDate":
-                validateField(expressions.date, e.target, 'inputCreationDate', 'creationDateHelp', 'date_creation');
                 break;
             default:
                 break;
@@ -110,9 +107,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
             document.getElementById(`${inputName}`).classList.add('border','border-success');
             document.getElementById(`${idHelp}`).classList.add('d-none');
             fieldState[inputName] = true;
-            if (inputName == 'inputActive' && input.value == '1') {
+            if ((inputName == 'inputAdmin' || inputName == 'inputActive') && input.value == '1') {
                 fieldValue[fieldName] = true;
-            } else if (inputName == 'inputActive' && input.value == '2')
+            } else if ((inputName == 'inputAdmin' || inputName == 'inputActive') && input.value == '2')
                 fieldValue[fieldName] = false;
             else {
                 fieldValue[fieldName] = input.value;
@@ -132,25 +129,25 @@ document.addEventListener('DOMContentLoaded', (e) => {
     });
 
 
-    /* *** Botón de abrir y editar el formulario de producto ************************************** */
+    /* *** Botón de abrir y editar el formulario de usuario ************************************** */
 
-    const productModal = new bootstrap.Modal(document.getElementById('productModal'));
+    const userModal = new bootstrap.Modal(document.getElementById('userModal'));
     let option = '';
 
-    // Botón para abrir el formulario de añadir un producto
+    // Botón para abrir el formulario de añadir un usuario
     const buttonOpenAdd = document.querySelector(".btnOpenAdd");
     buttonOpenAdd.addEventListener('click', ()=>{
-        formProduct.reset();
+        formUser.reset();
         option = 'add';
-        productModal.show();
+        userModal.show();
         document.querySelector(".modal-header").classList.add("modal-header-green");
         document.querySelector(".modal-header").classList.remove("modal-header-blue");
-        document.getElementById("modal-title").innerHTML = `<span>Agregar Producto</span>`;
-        document.getElementById("submitProduct").innerHTML = `<button class="btnAddProduct btn text-white" type="submit">Enviar</button>`;
+        document.getElementById("modal-title").innerHTML = `<span>Agregar Usuario</span>`;
+        document.getElementById("submitUser").innerHTML = `<button class="btnAddUser btn text-white" type="submit">Enviar</button>`;
 
     });
 
-    // Función para poder manejar los botones que abren el formulario de agregar y añadir un producto
+    // Función para poder manejar los botones que abren el formulario de agregar y añadir un usuario
     const on = (element, event, selector, handler) => {
         element.addEventListener(event, e => {
             if (e.target.closest(selector)){
@@ -159,17 +156,19 @@ document.addEventListener('DOMContentLoaded', (e) => {
         })
     };
 
-    // Botón para abrir el formulario de editar un producto
+    // Botón para abrir el formulario de editar un usuario
     on(document, 'click', '.btnOpenEdit', e => {
-        const inputsId = ['','inputDescription', 'inputCategory', 'inputStock', 'inputPrice', 'inputActive', 'inputCreationDate',''];
-        const valuesInput = ["id", "description", "category", "stock", "price_unit", "active", "date_creation", "userId"];
+        const inputsId = [' ', 'inputName', 'inputLastName', 'inputEmail', 'inputPassword', 'inputAdmin', 'inputActive'];
+        const valuesInput = ["id", "name", "lastName", "email", "password", "admin", "active"];
         const buttonOpenEdit = document.querySelector(".btnOpenEdit");
         let rowList = Array.from(buttonOpenEdit.parentElement.parentElement.getElementsByTagName('td'));
         for (let i = 0; i < rowList.length-1; i++) {
+            console.log(rowList[i].innerHTML);
+            console.log(inputsId[i]);
             if (i > 0) {
-                if(inputsId[i] == 'inputActive' && rowList[i].innerText == 'true') {
+                if((inputsId[i] == 'inputAdmin' || inputsId[i] == 'inputActive') && rowList[i].innerText == 'true') {
                     document.getElementById(inputsId[i]).value = 1;
-                } else if (inputsId[i] == 'inputActive' && rowList[i].innerText == 'false') {
+                } else if ((inputsId[i] == 'inputAdmin' || inputsId[i] == 'inputActive') && rowList[i].innerText == 'false') {
                     document.getElementById(inputsId[i]).value = 2;
                 } else {
                     document.getElementById(inputsId[i]).value = rowList[i].innerText;
@@ -179,31 +178,24 @@ document.addEventListener('DOMContentLoaded', (e) => {
             fieldValue[valuesInput[i]] = rowList[i].innerText;
         }
         option = 'edit';
-        productModal.show();
+        userModal.show();
         document.querySelector(".modal-header").classList.add("modal-header-blue");
         document.querySelector(".modal-header").classList.remove("modal-header-green");
-        document.getElementById("modal-title").innerHTML = `<span>Editar Producto</span>`;
-        document.getElementById("submitProduct").innerHTML = `<button class="btnEditProduct btn text-white" type="submit">Enviar</button>`;
+        document.getElementById("modal-title").innerHTML = `<span>Editar Usuario</span>`;
+        document.getElementById("submitUser").innerHTML = `<button class="btnEditUser btn text-white" type="submit">Enviar</button>`;
     });
 
 
-    // const buttonClose = document.getElementById("btnClose");
-    // buttonClose.addEventListener('click', ()=>{
-    //     productModal.hide();
-    //     productModal.dispose();
-    // });
-
-
-    /* *** Enviar el producto agregado************************************** */
-    const formProduct = document.getElementById("form-producto");
-    formProduct.addEventListener('submit', (e) => {
+    /* *** Enviar el usuario agregado************************************** */
+    const formUser = document.getElementById("form-usuario");
+    formUser.addEventListener('submit', (e) => {
         e.preventDefault();     
-        if(fieldState.inputDescription && fieldState.inputCategory && fieldState.inputStock && fieldState.inputPrice && fieldState.inputActive && fieldState.inputCreationDate){
+        if(fieldState.inputName && fieldState.inputLastName && fieldState.inputEmail && fieldState.inputPassword && fieldState.inputAdmin&& fieldState.inputActive){
             if (option == 'add'){
-                postToAddProduct(fieldValue);
+                postToAddUser(fieldValue);
             } else if (option == 'edit'){
                 console.log("editar");
-                putToUpdateProduct(fieldValue);
+                putToUpdateUser(fieldValue);
             }
         } else {
             console.log("Completar campos");
@@ -222,21 +214,23 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
 
-    // Botón para abrir el alert para confirmar la eliminación de producto. 
+    // Botón para abrir el alert para confirmar la eliminación de usuario. 
     on(document, 'click', '.btnOpenDelete', e => {
         deleteModal.show();
     });
 
-    const btnDeleteProduct = document.getElementById("btnDeleteProduct")
-    btnDeleteProduct.addEventListener('click', ()=>{
+    const btnDeleteUser = document.getElementById("btnDeleteUser")
+    btnDeleteUser.addEventListener('click', ()=>{
         const buttonOpenDelete = document.querySelector(".btnOpenDelete");
-        const idProduct = Array.from(buttonOpenDelete.parentElement.parentElement.getElementsByTagName('td'))[0].innerHTML;
-        deleteToRemoveProduct(idProduct);
+        console.log(buttonOpenDelete);
+        const idUser = Array.from(buttonOpenDelete.parentElement.parentElement.getElementsByTagName('td'))[0].innerHTML;
+        console.log(idUser);
+        deleteToRemoveUser(idUser);
     });
 
-    //Método post para agregar el producto
-    const postToAddProduct = async (bodyObject) => {
-        const url = "/api/product";
+    //Método post para agregar el usuario
+    const postToAddUser = async (bodyObject) => {
+        const url = "/api/user";
         const response = await fetch(url, {
             method: "POST",
             body: JSON.stringify(bodyObject),
@@ -246,23 +240,23 @@ document.addEventListener('DOMContentLoaded', (e) => {
         });
 
         if (response.ok) {
-            alertMessage("Producto agregado con éxito","success","check-circle-fill");
-            getToListProducts();
-            formProduct.reset();
-            productModal.hide();
+            alertMessage("Usuario agregado con éxito","success","check-circle-fill");
+            getToListUsers();
+            formUser.reset();
+            userModal.hide();
             console.log("Respuesta correcta");
         } else {
             // const message = await response.text();
-            alertMessage("Error al intentar agregar el producto","danger","exclamation-triangle-fill");
+            alertMessage("Error al intentar agregar el usuario","danger","exclamation-triangle-fill");
             console.log("Respuesta incorrecta");
         }
         inputs.forEach((input) => input.classList.remove('border','border-success'));
     }
 
 
-    //Método post para agregar el producto
-    const putToUpdateProduct = async (bodyObject) => {
-        const url = "/api/product";
+    //Método post para agregar el usuario
+    const putToUpdateUser = async (bodyObject) => {
+        const url = "/api/user";
         const response = await fetch(url, {
             method: "PUT",
             body: JSON.stringify(bodyObject),
@@ -272,42 +266,37 @@ document.addEventListener('DOMContentLoaded', (e) => {
         });
         console.log(JSON.stringify(bodyObject));
         if (response.ok) {
-            alertMessage("Producto actualizado con éxito","success","check-circle-fill");
-            getToListProducts();
-            formProduct.reset();
-            productModal.hide();
+            alertMessage("Usuario actualizado con éxito","success","check-circle-fill");
+            getToListUsers();
+            formUser.reset();
+            userModal.hide();
             console.log("Respuesta correcta");
         } else {
             // const message = await response.text();
-            alertMessage("Error al intentar actualizar el producto","danger","exclamation-triangle-fill");
+            alertMessage("Error al intentar actualizar el usuario","danger","exclamation-triangle-fill");
             console.log("Respuesta incorrecta");
         }
         inputs.forEach((input) => input.classList.remove('border','border-success'));
     }
 
 
-    //Método delete para eliminar el producto
-    const deleteToRemoveProduct = async (id) => {
-        console.log(id);
-        const url = "/api/product/" + id;
+    //Método delete para eliminar el usuario
+    const deleteToRemoveUser = async (id) => {
+        const url = "/api/user/" + id;
         const response = await fetch(url, {
             method: "DELETE"
         });
 
         if (response.ok) {
-            alertMessage("Producto eliminado con éxito","success","check-circle-fill");
-            getToListProducts();
+            alertMessage("Usuario eliminado con éxito","success","check-circle-fill");
+            getToListUsers();
             deleteModal.hide();
             console.log("Respuesta correcta");
         } else {
             // const message = await response.text();
-            alertMessage("Error al intentar eliminar el producto","danger","exclamation-triangle-fill");
+            alertMessage("Error al intentar eliminar el usuario","danger","exclamation-triangle-fill");
             console.log("Respuesta incorrecta");
         }
     }
-            
-
-
-
 
 });

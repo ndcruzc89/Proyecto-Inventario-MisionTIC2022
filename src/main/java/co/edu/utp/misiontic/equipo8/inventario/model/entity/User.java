@@ -2,7 +2,6 @@ package co.edu.utp.misiontic.equipo8.inventario.model.entity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,11 +37,11 @@ public class User {
     @Column(name = "contrasena", nullable = false, length = 50)
     private String password;
 
-    @Column(name = "activo", nullable = false)
-    private Boolean active;
-
     @Column(name = "administrador", nullable = false, length = 20)
     private Boolean admin;
+
+    @Column(name = "activo", nullable = false)
+    private Boolean active;
 
     @OneToMany(mappedBy = "user")
     private List<Product> products;

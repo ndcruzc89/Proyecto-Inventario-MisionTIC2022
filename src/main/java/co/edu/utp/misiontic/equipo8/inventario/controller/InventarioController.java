@@ -22,4 +22,9 @@ public class InventarioController {
         return "productos";
     }
 
+    @GetMapping("usuarios")
+    public String goToUsers(Model model) {
+        return "usuarios";
+    }
+
 }

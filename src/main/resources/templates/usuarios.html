@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos</title>
+    <title>Usuarios</title>
     <link rel="shortcut icon" href="./images/inventario.png" type="image/png">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/templateApp.css">
-    <link rel="stylesheet" href="./css/productos.css">
+    <link rel="stylesheet" href="./css/usuarios.css">
 </head>
 <body>
     <div class="container-fluid">
@@ -29,13 +29,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/productos" class="nav-link active text-white" aria-current="page">
+                            <a href="/productos" class="nav-link  text-white" >
                                 <img src="./images/productos.svg" class= "img-fluid img-links me-2" alt="productos">
                                 <span class="">Productos</span> 
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a href="/usuarios" class="nav-link text-white">
+                            <a href="/usuarios" class="nav-link active text-white" aria-current="page">
                                 <img src="./images/usuarios.svg" class= "img-fluid img-links me-2" alt="usuarios">
                                 <span class="">Usuarios</span>
                             </a>
@@ -60,8 +60,8 @@
 
                 <!-- MAIN -->
                 <main>
-                    <div class="card card-products mx-auto">
-                        <h4 class="card-header card-header-products text-white">Productos</h4>
+                    <div class="card card-users mx-auto">
+                        <h4 class="card-header card-header-users text-white">Usuarios</h4>
                         <div class="card-body">
                             <div class="row d-flex align-items-center">
                                 <div class="col-12 col-sm-8 col-xl-4 form-group d-flex align-items-center mb-3 mb-sm-4">
@@ -93,12 +93,12 @@
                                     <thead class="header-table">
                                     <tr class="align-middle">
                                         <th scope="col">ID</th>
-                                        <th scope="col">Descripción</th>
-                                        <th scope="col">Categoría</th>
-                                        <th scope="col">Stock</th>
-                                        <th scope="col">Precio x Und</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col" class="d-none">Contraseña</th>
+                                        <th scope="col">Administrador</th>
                                         <th scope="col">Activo</th>
-                                        <th scope="col">Fecha creación</th>
                                         <th scope="col">Acción</th>
                                     </tr>
                                     </thead>
@@ -123,7 +123,7 @@
                 </main>
 
                 <!-- MODAL -> Agregar y editar Producto-->
-                <div id="productModal" class="modal">
+                <div id="userModal" class="modal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -131,28 +131,37 @@
                                 <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form id="form-producto"class="row">
-                                    <div class="mb-3 col-12">
-                                        <label for="inputDescription" class="form-label">Descripción <span class="text-danger">*</span> </label>
-                                        <input id="inputDescription" name="inputDescription" class="form-control input" type="text" placeholder="p ej.: Iphone 13 Pro" aria-describedby="descriptionHelp">
-                                        <div id="descriptionHelp" class="form-text text-danger d-none">El campo solo puede contener letras (con o sin acentos), números, espacios y guiones</div>
+                                <form id="form-usuario"class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="inputName" class="form-label">Nombre <span class="text-danger">*</span> </label>
+                                        <input type="text" class="form-control input" name="inputName" id="inputName" placeholder="p ej.: Nelson" aria-describedby="nameHelp">
+                                        <div id="nameHelp" class="form-text text-danger d-none">El campo nombre solo puede contener letras y espacios.</div>
                                     </div>
-                                    <div class="mb-3 col-12">
-                                        <label for="inputCategory" class="form-label">Categoría <span class="text-danger">*</span> </label>
-                                        <input id="inputCategory" name="inputCategory" class="form-control input" type="text" placeholder="p ej.: Tecnología " aria-describedby="categoryHelp">
-                                        <div id="categoryHelp" class="form-text text-danger d-none">El campo solo puede contener letras y espacios.</div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="inputLastName" class="form-label">Apellido <span class="text-danger">*</label>
+                                        <input type="text" class="form-control input" name="inputLastName" id="inputLastName" placeholder="p ej.: Cruz">
+                                        <div id="lastNameHelp" class="form-text text-danger d-none">El campo apellidos solo puede contener letras y espacios.</div>
                                     </div>
-                                    <div class="mb-3 col-4">
-                                        <label for="inputStock" class="form-label">Stock <span class="text-danger">*</span> </label>
-                                        <input id="inputStock" name="inputStock" class="form-control input" type="number" placeholder="p ej.: 12" aria-describedby="stockHelp">
-                                        <div id="stockHelp" class="form-text text-danger d-none">El campo solo puede contener números.</div>
+                                    <div class="mb-3">
+                                        <label for="inputEmail" class="form-label">Email <span class="text-danger">*</label>
+                                        <input type="email" class="form-control input" name="inputEmail" id="inputEmail" placeholder="p ej.: nelson12@example.com">
+                                        <div id="emailHelp" class="form-text text-danger d-none">El campo email debe ser una dirección de correo electrónico válida</div>
                                     </div>
-                                    <div class="mb-3 col-8">
-                                        <label for="inputPrice" class="form-label">Precio x Unidad <span class="text-danger">*</span> </label>
-                                        <input id="inputPrice" name="inputPrice" class="form-control input" type="number" placeholder="p ej.: 5448900" aria-describedby="priceHelp">
-                                        <div id="priceHelp" class="form-text text-danger d-none">El campo solo puede contener números o la coma en caso de usar decimales.</div>
+                                    <div class="mb-3">
+                                        <label for="inputPassword" class="form-label">Contraseña <span class="text-danger">*</label>
+                                        <input type="password" class="form-control input" name="inputPassword" id="inputPassword" placeholder="Ingrese una contraseña válida">
+                                        <div id="passwordHelp" class="form-text text-danger d-none">La contraseña debe contener más de 8 caracteres, al menos un dígito, al menos una letra mayúscula y al menos una letra minúscula.</div>
                                     </div>
-                                    <div class="mb-4 col-4">
+                                    <div class="mb-4 col-6">
+                                        <label class="mb-2" for="inputAdmin">Administrador <span class="text-danger">*</span></label>
+                                        <select id="inputAdmin" name="inputAdmin" class="form-select input" >
+                                          <option selected>Selecciona una opción</option>
+                                          <option value="1">True</option>
+                                          <option value="2">False</option>
+                                        </select>
+                                        <div id="adminHelp" class="form-text text-danger d-none">Seleccione una de las opciones.</div>
+                                    </div>
+                                    <div class="mb-4 col-6">
                                         <label class="mb-2" for="inputActive">Activo <span class="text-danger">*</span></label>
                                         <select id="inputActive" name="inputActive" class="form-select input" >
                                           <option selected>Selecciona una opción</option>
@@ -161,12 +170,7 @@
                                         </select>
                                         <div id="activeHelp" class="form-text text-danger d-none">Seleccione una de las opciones.</div>
                                     </div>
-                                    <div class="mb-4 col-8">
-                                        <label class="d-block mb-2" for="inputCreationDate">Fecha de creación: <span class="text-danger">*</span></label>
-                                        <input  id="inputCreationDate" name="inputCreationDate" class="form-control input" type="date" placeholder="p ej.: 2022/09/29">
-                                        <div id="creationDateHelp" class="form-text text-danger d-none">Este campo no puede estar vacío, debe contener una fecha válida.</div>
-                                    </div>
-                                    <div id="submitProduct" class="text-center">
+                                    <div id="submitUser" class="text-center">
                                     </div>
                                 </form>
                             </div>
@@ -185,11 +189,11 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                          <p>Esta seguro de eliminar el registro de producto seleccionado?</p>
+                          <p>Esta seguro de eliminar el registro de usuario seleccionado?</p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cancelar</button>
-                          <button id="btnDeleteProduct" type="button" class="btn btn-danger">Eliminar</button>
+                          <button id="btnDeleteUser" type="button" class="btn btn-danger">Eliminar</button>
                         </div>
                       </div>
                     </div>
@@ -203,6 +207,6 @@
     </div>
 
     <script src="./js/bootstrap.min.js"></script>
-    <script src="./js/productos.js"></script> 
+    <script src="./js/usuarios.js"></script> 
 </body>
 </html>

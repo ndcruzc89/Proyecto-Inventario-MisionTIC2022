@@ -11,33 +11,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.edu.utp.misiontic.equipo8.inventario.controller.dto.ProductRequest;
-import co.edu.utp.misiontic.equipo8.inventario.service.ProductService;
+import co.edu.utp.misiontic.equipo8.inventario.controller.dto.UserRequest;
+import co.edu.utp.misiontic.equipo8.inventario.service.UserService;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/product")
-public class ProductRestController {
-
-    private ProductService productService;
+@RequestMapping("api/user")
+public class UserRestController {
+    
+    private UserService userService;
 
     @GetMapping
-    public ResponseEntity<?> listProducts() {
-        var response = productService.getAllProducts();
+    public ResponseEntity<?> listUsers() {
+        var response = userService.getAllUsers();
         return ResponseEntity.ok().body(response);
     }
 
     @GetMapping("/{keyword}")
     public ResponseEntity<?> searchKeyword(@PathVariable("keyword") String keyword) {
-        var response = productService.getKeywordResult(keyword);
+        var response = userService.getKeywordResult(keyword);
         return ResponseEntity.ok().body(response);
     }
 
     @PostMapping
-    public ResponseEntity<?> addProduct(@RequestBody ProductRequest product) {
+    public ResponseEntity<?> addUser(@RequestBody UserRequest user) {
         try {
-            return ResponseEntity.ok().body(productService.createProduct(product));
+            return ResponseEntity.ok().body(userService.createUser(user));
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ex.getMessage());
@@ -45,9 +45,9 @@ public class ProductRestController {
     }
 
     @PutMapping
-    public ResponseEntity<?> editProduct(@RequestBody ProductRequest product) {
+    public ResponseEntity<?> editUser(@RequestBody UserRequest user) {
         try {
-            return ResponseEntity.ok().body(productService.updateProduct(product));
+            return ResponseEntity.ok().body(userService.updateUser(user));
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ex.getMessage());
@@ -55,14 +55,13 @@ public class ProductRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> removeProduct(@PathVariable("id") Integer id) {
+    public ResponseEntity<?> removeUser(@PathVariable("id") Integer id) {
         try {
-            productService.deleteProduct(id);
-            return ResponseEntity.status(HttpStatus.OK).body("Deleted product");
+            userService.deleteUser(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Deleted user");
         } catch (RuntimeException ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(ex.getMessage());
         }
     }
-
 }
