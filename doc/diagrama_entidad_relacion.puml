@@ -7,8 +7,8 @@ entity Producto {
     categoria varchar(50) <<NN>>
     stock integer <<NN>>
     precio_unidad double <<NN>>
-    estado varchar(20) <<NN>>
-    fecha_creación date <<NN>>
+    activo bit(1) <<NN>>
+    fecha_creacion date <<NN>>
     --
     id_usuario integer <<NN>> <<FK>>
 }
@@ -19,9 +19,9 @@ entity Usuario {
     nombre varchar(50) <<NN>>
     apellido varchar(50) <<NN>>
     email varchar(50) <<NN>> <<UQ>>
-    contraseña varchar(50) <<NN>>
-    estado varchar(20) <<NN>>
-    admin varchar(50) <<NN>>
+    contrasena varchar(50) <<NN>>
+    activo bit(1) <<NN>>
+    admin bit(1) <<NN>>
 }
 
 Producto }|-right-|| Usuario

@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
             <td>${date_creation}</td>
             <td>
                 <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
-                    <img src="./images/editar.svg" class= "img-fluid" alt="editar">
+                    <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
                 </button>
                 <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
-                    <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
+                    <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
                 </button>
             </td>
         </tr>`
@@ -160,12 +160,19 @@ document.addEventListener('DOMContentLoaded', (e) => {
     };
 
     // Botón para abrir el formulario de editar un producto
-    on(document, 'click', '.btnOpenEdit', e => {
+    on(document, 'click', '.btnOpenEdit', (e) => {
         const inputsId = ['','inputDescription', 'inputCategory', 'inputStock', 'inputPrice', 'inputActive', 'inputCreationDate',''];
         const valuesInput = ["id", "description", "category", "stock", "price_unit", "active", "date_creation", "userId"];
-        const buttonOpenEdit = document.querySelector(".btnOpenEdit");
-        let rowList = Array.from(buttonOpenEdit.parentElement.parentElement.getElementsByTagName('td'));
+        let parentsBtnOpenEdit = '';
+        if (e.target.matches(".imgBtnOpenEdit")) {
+            parentsBtnOpenEdit = e.target.parentElement.parentElement.parentElement.getElementsByTagName('td');
+        }
+        if (e.target.matches(".btnOpenEdit")){
+            parentsBtnOpenEdit = e.target.parentElement.parentElement.getElementsByTagName('td');
+        } 
+        let rowList = Array.from(parentsBtnOpenEdit);
         for (let i = 0; i < rowList.length-1; i++) {
+            console.log(rowList[i].innerText)
             if (i > 0) {
                 if(inputsId[i] == 'inputActive' && rowList[i].innerText == 'true') {
                     document.getElementById(inputsId[i]).value = 1;
@@ -187,10 +194,33 @@ document.addEventListener('DOMContentLoaded', (e) => {
     });
 
 
+    /* *** Botón para abrir el alert y confirmar la eliminación de producto ************************************** */ 
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    let idProduct = 0;
+
+    on(document, 'click', '.btnOpenDelete', e => {
+        let parentsBtnOpenDelete = '';
+        if (e.target.matches(".imgBtnOpenDelete")) {
+            parentsBtnOpenDelete = e.target.parentElement.parentElement.parentElement.getElementsByTagName('td');
+        }
+        if (e.target.matches(".btnOpenDelete")){
+            parentsBtnOpenDelete = e.target.parentElement.parentElement.getElementsByTagName('td');
+        } 
+        idProduct = Array.from(parentsBtnOpenDelete)[0].innerText;
+        deleteModal.show();
+    });
+
+
+        /* *** Botón para eliminar el producto ************************************** */ 
+    const btnDeleteProduct = document.getElementById("btnDeleteProduct")
+    btnDeleteProduct.addEventListener('click', (e)=>{
+        deleteToRemoveProduct(idProduct);
+    });
+
+
     // const buttonClose = document.getElementById("btnClose");
     // buttonClose.addEventListener('click', ()=>{
-    //     productModal.hide();
-    //     productModal.dispose();
+    //     formProduct.reset();
     // });
 
 
@@ -220,19 +250,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
             </div>`].join('');
     }
 
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
 
-    // Botón para abrir el alert para confirmar la eliminación de producto. 
-    on(document, 'click', '.btnOpenDelete', e => {
-        deleteModal.show();
-    });
 
-    const btnDeleteProduct = document.getElementById("btnDeleteProduct")
-    btnDeleteProduct.addEventListener('click', ()=>{
-        const buttonOpenDelete = document.querySelector(".btnOpenDelete");
-        const idProduct = Array.from(buttonOpenDelete.parentElement.parentElement.getElementsByTagName('td'))[0].innerHTML;
-        deleteToRemoveProduct(idProduct);
-    });
+
 
     //Método post para agregar el producto
     const postToAddProduct = async (bodyObject) => {

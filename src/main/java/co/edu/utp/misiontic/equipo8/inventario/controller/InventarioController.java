@@ -7,22 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class InventarioController {
     
-    @GetMapping("/registrarse")
-    public String goToRegister(Model model) {
-        return "registrarse";
-    }
-
     @GetMapping("/inicio")
     public String goToHome(Model model) {
         return "inicio";
     }
 
-    @GetMapping("productos")
+    @GetMapping("/productos")
     public String goToProducts(Model model) {
         return "productos";
     }
 
-    @GetMapping("usuarios")
+    @GetMapping("/usuarios")
     public String goToUsers(Model model) {
         return "usuarios";
     }

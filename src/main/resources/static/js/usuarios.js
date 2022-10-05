@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
             <td>${active}</td>
             <td>
                 <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
-                    <img src="./images/editar.svg" class= "img-fluid" alt="editar">
+                    <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
                 </button>
                 <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
-                    <img src="./images/eliminar.svg" class= "img-fluid" alt="eliminar">
+                    <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
                 </button>
             </td>
         </tr>`
@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
     const validateForm = (e) => {
-        console.log(e.target.name)
         switch (e.target.name) {
             case "inputName":
                 validateField(expressions.text, e.target, 'inputName', 'nameHelp','name');
@@ -160,11 +159,15 @@ document.addEventListener('DOMContentLoaded', (e) => {
     on(document, 'click', '.btnOpenEdit', e => {
         const inputsId = [' ', 'inputName', 'inputLastName', 'inputEmail', 'inputPassword', 'inputAdmin', 'inputActive'];
         const valuesInput = ["id", "name", "lastName", "email", "password", "admin", "active"];
-        const buttonOpenEdit = document.querySelector(".btnOpenEdit");
-        let rowList = Array.from(buttonOpenEdit.parentElement.parentElement.getElementsByTagName('td'));
+        let parentsBtnOpenEdit = '';
+        if (e.target.matches(".imgBtnOpenEdit")) {
+            parentsBtnOpenEdit = e.target.parentElement.parentElement.parentElement.getElementsByTagName('td');
+        }
+        if (e.target.matches(".btnOpenEdit")){
+            parentsBtnOpenEdit = e.target.parentElement.parentElement.getElementsByTagName('td');
+        } 
+        let rowList = Array.from(parentsBtnOpenEdit);
         for (let i = 0; i < rowList.length-1; i++) {
-            console.log(rowList[i].innerHTML);
-            console.log(inputsId[i]);
             if (i > 0) {
                 if((inputsId[i] == 'inputAdmin' || inputsId[i] == 'inputActive') && rowList[i].innerText == 'true') {
                     document.getElementById(inputsId[i]).value = 1;
@@ -186,6 +189,28 @@ document.addEventListener('DOMContentLoaded', (e) => {
     });
 
 
+    /* *** Botón para abrir el alert y confirmar la eliminación de usuario ************************************** */
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    let idProduct = 0;
+
+    on(document, 'click', '.btnOpenDelete', e => {
+        let parentsBtnOpenDelete = '';
+        if (e.target.matches(".imgBtnOpenDelete")) {
+            parentsBtnOpenDelete = e.target.parentElement.parentElement.parentElement.getElementsByTagName('td');
+        }
+        if (e.target.matches(".btnOpenDelete")){
+            parentsBtnOpenDelete = e.target.parentElement.parentElement.getElementsByTagName('td');
+        } 
+        idProduct = Array.from(parentsBtnOpenDelete)[0].innerText;
+        deleteModal.show();
+    });
+
+    const btnDeleteUser = document.getElementById("btnDeleteUser")
+    btnDeleteUser.addEventListener('click', ()=>{
+        deleteToRemoveUser(idProduct);
+    });
+
+
     /* *** Enviar el usuario agregado************************************** */
     const formUser = document.getElementById("form-usuario");
     formUser.addEventListener('submit', (e) => {
@@ -194,11 +219,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
             if (option == 'add'){
                 postToAddUser(fieldValue);
             } else if (option == 'edit'){
-                console.log("editar");
                 putToUpdateUser(fieldValue);
             }
         } else {
-            console.log("Completar campos");
             alertMessage("Por favor complete todos los campos correctamente","danger","exclamation-triangle-fill");
         }
     });
@@ -212,21 +235,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
             </div>`].join('');
     }
 
-    const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-
-    // Botón para abrir el alert para confirmar la eliminación de usuario. 
-    on(document, 'click', '.btnOpenDelete', e => {
-        deleteModal.show();
-    });
-
-    const btnDeleteUser = document.getElementById("btnDeleteUser")
-    btnDeleteUser.addEventListener('click', ()=>{
-        const buttonOpenDelete = document.querySelector(".btnOpenDelete");
-        console.log(buttonOpenDelete);
-        const idUser = Array.from(buttonOpenDelete.parentElement.parentElement.getElementsByTagName('td'))[0].innerHTML;
-        console.log(idUser);
-        deleteToRemoveUser(idUser);
-    });
 
     //Método post para agregar el usuario
     const postToAddUser = async (bodyObject) => {
@@ -244,11 +252,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
             getToListUsers();
             formUser.reset();
             userModal.hide();
-            console.log("Respuesta correcta");
         } else {
-            // const message = await response.text();
             alertMessage("Error al intentar agregar el usuario","danger","exclamation-triangle-fill");
-            console.log("Respuesta incorrecta");
         }
         inputs.forEach((input) => input.classList.remove('border','border-success'));
     }
@@ -264,17 +269,13 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 "Content-Type": "application/json"
             }
         });
-        console.log(JSON.stringify(bodyObject));
         if (response.ok) {
             alertMessage("Usuario actualizado con éxito","success","check-circle-fill");
             getToListUsers();
             formUser.reset();
             userModal.hide();
-            console.log("Respuesta correcta");
         } else {
-            // const message = await response.text();
             alertMessage("Error al intentar actualizar el usuario","danger","exclamation-triangle-fill");
-            console.log("Respuesta incorrecta");
         }
         inputs.forEach((input) => input.classList.remove('border','border-success'));
     }
@@ -291,11 +292,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
             alertMessage("Usuario eliminado con éxito","success","check-circle-fill");
             getToListUsers();
             deleteModal.hide();
-            console.log("Respuesta correcta");
         } else {
-            // const message = await response.text();
             alertMessage("Error al intentar eliminar el usuario","danger","exclamation-triangle-fill");
-            console.log("Respuesta incorrecta");
         }
     }
 
