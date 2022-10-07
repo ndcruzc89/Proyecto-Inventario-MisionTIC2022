@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
     /* ******************************************************************** */
     /* *** Añadir Lista de Productos ************************************** */
 
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+
     const getToListProducts = () => {
         fetch('/api/product')
         .then(response => response.json())
@@ -11,61 +13,59 @@ document.addEventListener('DOMContentLoaded', (e) => {
         });
     }
 
-    // const addProducts = (data) => {
-    //     const bodyTable = document.getElementById("body-table");
-    //     bodyTable.innerText = "";
-    //     data.map(({id, description, category, stock, price_unit, active, date_creation}) => {
-
-    //     let rowTable = [
-    //     `<tr id="productRow${id}" class="align-middle">
-    //         <td>${id}</td>
-    //         <td>${description}</td>
-    //         <td>${category}</td>
-    //         <td>${stock}</td>
-    //         <td>${price_unit}</td>
-    //         <td>${active}</td>
-    //         <td>${date_creation}</td>
-    //         <td>
-    //             <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
-    //                 <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
-    //             </button>
-    //             <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
-    //                 <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
-    //             </button>
-    //         </td>
-    //     </tr>`
-    //     ].join('\n');
-    //     bodyTable.innerHTML= bodyTable.innerHTML + rowTable;
-    //     });
-
-    // }
-
-
     const addProducts = (data) => {
         const bodyTable = document.getElementById("body-table");
         bodyTable.innerText = "";
+        dataTable.clear();
+        let rowTable = '';
         data.map(({id, description, category, stock, price_unit, active, date_creation}) => {
-
-        let rowTable = [
-            `<tr id="productRow${id}" class="align-middle">
-                <td>${id}</td>
-                <td>${description}</td>
-                <td>${category}</td>
-                <td>${stock}</td>
-                <td>${price_unit}</td>
-                <td>${active}</td>
-                <td>${date_creation}</td>
-                <td>
-                    <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
-                        <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
-                    </button>
-                    <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
+        
+        if (user["admin"]) {
+            rowTable = [
+                `<tr id="productRow${id}" class="align-middle">
+                    <td>${id}</td>
+                    <td>${description}</td>
+                    <td>${category}</td>
+                    <td>${stock}</td>
+                    <td>${price_unit}</td>
+                    <td>${active}</td>
+                    <td>${date_creation}</td>
+                    <td>
+                        <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
+                            <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+                        </button>
+                        <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
+                            <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
+                        </button>
+                    </td>
+                </tr>`
+                ].join('\n');
+        } else {
+            rowTable = [
+                `<tr id="productRow${id}" class="align-middle">
+                    <td>${id}</td>
+                    <td>${description}</td>
+                    <td>${category}</td>
+                    <td>${stock}</td>
+                    <td>${price_unit}</td>
+                    <td>${active}</td>
+                    <td>${date_creation}</td>
+                    <td>
+                        <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
+                            <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+                        </button>
+                        <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button" disabled>
                         <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
                     </button>
-                </td>
-            </tr>`
-            ].join('\n');
-            dataTable.row.add($(rowTable)).draw();
+                    </td>
+                </tr>`
+                ].join('\n');
+        }
+
+        dataTable.row.add($(rowTable)).draw();
+        let rowCount = document.querySelector('#table-products tr').length;
+        const productsNumber = localStorage.setItem("productsNumber",rowCount);
+        console.log(productsNumber);
         });
     }
 
@@ -93,25 +93,42 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 "previous": "Anterior"
             }
         },
-        "lengthMenu": [5,10,15,20 ],
+        responsive: true,
+        "lengthMenu": [5,10,15],
         "dom": 'lBftip',
         buttons: [
             {
-                text: 
-                    +'<img src="./images/agregar.svg" class= "img-fluid me-1" alt="añadir">'
-                    +'<span class="d-none d-sm-inline">Agregar</span>',
+                text: '&nbsp', 
                 className: "btnOpenAdd btn btn-agregar text-white fs-6"
             }
         ]
     });
-    
+
+    document.querySelector('.dataTables_wrapper').classList.add("row", "d-flex", "align-items-center", "justify-content-center");
+
+    document.querySelector('.dataTables_length').classList.add("col-12","col-sm-5", "col-md-4", "mb-3", "mb-sm-4")
+
+    document.querySelector('.dt-buttons').classList.remove("btn-group", "flex-wrap");
+    document.querySelector('.dt-buttons').classList.add("col-12", "col-md-3", "mb-3", "mb-sm-4", "text-md-center" );
+
+    document.querySelector('.dt-buttons .btn').innerHTML = [
+    `<img src="./images/agregar.svg" class= "img-fluid me-1" alt="añadir">
+     <span class="">Agregar</span>`].join('');
+
+    document.querySelector('.dataTables_filter').classList.add("col-12", "col-md-5", "mb-4");
+
+    document.getElementById('table-products').classList.add("d-block", "table-responsive");
+
+    document.querySelector('.dataTables_info').classList.add("col-12","col-md-6", "text-muted", "mb-3", "mb-sm-4");
+
+    document.querySelector('.dataTables_paginate').classList.add("col-12","col-md-6", "mb-3", "mb-sm-4", "mt-md-4");
 
 
 
     /* ******************************************************************** */
     /* *** Validar Formulario ********************************************* */
     const inputs = document.querySelectorAll('#form-producto .input');
-    const user = JSON.parse(localStorage.getItem("loggedUser"));
+    
 
     const expressions = {
         description: /^[a-zA-ZÀ-ÿ\s0-9\-]{1,40}$/, // Letras (pueden llevar acentos), números, espacios y guiones
@@ -276,18 +293,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
     });
 
 
-        /* *** Botón para eliminar el producto ************************************** */ 
+    /* *** Botón para eliminar el producto ************************************** */ 
     const btnDeleteProduct = document.getElementById("btnDeleteProduct")
     btnDeleteProduct.addEventListener('click', (e)=>{
         deleteToRemoveProduct(idProduct);
     });
-
-
-    // const buttonClose = document.getElementById("btnClose");
-    // buttonClose.addEventListener('click', ()=>{
-    //     formProduct.reset();
-    // });
-
 
     /* *** Enviar el producto agregado************************************** */
     const formProduct = document.getElementById("form-producto");
@@ -316,9 +326,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
 
-
-
-
     //Método post para agregar el producto
     const postToAddProduct = async (bodyObject) => {
         const url = "/api/product";
@@ -337,7 +344,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
             productModal.hide();
             console.log("Respuesta correcta");
         } else {
-            // const message = await response.text();
             alertMessage("Error al intentar agregar el producto","danger","exclamation-triangle-fill");
             console.log("Respuesta incorrecta");
         }
@@ -363,7 +369,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
             productModal.hide();
             console.log("Respuesta correcta");
         } else {
-            // const message = await response.text();
             alertMessage("Error al intentar actualizar el producto","danger","exclamation-triangle-fill");
             console.log("Respuesta incorrecta");
         }
@@ -385,14 +390,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
             deleteModal.hide();
             console.log("Respuesta correcta");
         } else {
-            // const message = await response.text();
             alertMessage("Error al intentar eliminar el producto","danger","exclamation-triangle-fill");
             console.log("Respuesta incorrecta");
         }
     }
             
-
-
-
-
 });

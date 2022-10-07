@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
     /* ******************************************************************** */
     /* *** Añadir Lista de Productos ************************************** */
 
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+
     const getToListUsers = () => {
         fetch('/api/user')
         .then(response => response.json())
@@ -14,39 +16,114 @@ document.addEventListener('DOMContentLoaded', (e) => {
     const addUsers = (data) => {
         const bodyTable = document.getElementById("body-table");
         bodyTable.innerText = "";
+        dataTable.clear();
+        let rowTable = '';
         data.map(({id, name, lastName, email, password, admin, active}) => {
 
-        let rowTable = [
-        `<tr id="userRow${id}" class="align-middle">
-            <td>${id}</td>
-            <td>${name}</td>
-            <td>${lastName}</td>
-            <td>${email}</td>
-            <td class="d-none">${password}</td>
-            <td>${admin}</td>
-            <td>${active}</td>
-            <td>
-                <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
-                    <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
-                </button>
-                <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
-                    <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
-                </button>
-            </td>
-        </tr>`
-        ].join('\n');
-        bodyTable.innerHTML= bodyTable.innerHTML + rowTable;
+            if (user["admin"]) {
+                rowTable = [
+                    `<tr id="userRow${id}" class="align-middle">
+                        <td>${id}</td>
+                        <td>${name}</td>
+                        <td>${lastName}</td>
+                        <td>${email}</td>
+                        <td class="d-none">${password}</td>
+                        <td>${admin}</td>
+                        <td>${active}</td>
+                        <td>
+                            <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
+                                <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+                            </button>
+                            <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
+                                <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
+                            </button>
+                        </td>
+                    </tr>`
+                    ].join('\n');
+            } else {
+                rowTable = [
+                    `<tr id="userRow${id}" class="align-middle">
+                        <td>${id}</td>
+                        <td>${name}</td>
+                        <td>${lastName}</td>
+                        <td>${email}</td>
+                        <td class="d-none">${password}</td>
+                        <td>${admin}</td>
+                        <td>${active}</td>
+                        <td>
+                            <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button" disabled>
+                                <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+                            </button>
+                            <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button" disabled>
+                                <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
+                            </button>
+                        </td>
+                    </tr>`
+                    ].join('\n');
+            }
+            dataTable.row.add($(rowTable)).draw();
         });
 
     }
 
     getToListUsers();
 
+    //Datatable 
+    let dataTable = new DataTable('#table-users',{
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay información para mostrar",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+        responsive: true,
+        "lengthMenu": [5,10,15],
+        "dom": 'lBftip',
+        buttons: [
+            {
+                text: '&nbsp', 
+                className: "btnOpenAdd btn btn-agregar text-white fs-6"
+            }
+        ]
+    });
+
+    document.querySelector('.dataTables_wrapper').classList.add("row", "d-flex", "align-items-center", "justify-content-center");
+
+    document.querySelector('.dataTables_length').classList.add("col-12","col-sm-5", "col-md-4", "mb-3", "mb-sm-4")
+
+    document.querySelector('.dt-buttons').classList.remove("btn-group", "flex-wrap");
+    document.querySelector('.dt-buttons').classList.add("col-12", "col-md-3", "mb-3", "mb-sm-4", "text-md-center" );
+
+    document.querySelector('.dt-buttons .btn').innerHTML = [
+    `<img src="./images/agregar.svg" class= "img-fluid me-1" alt="añadir">
+     <span class="">Agregar</span>`].join('');
+
+    document.querySelector('.dataTables_filter').classList.add("col-12", "col-md-5", "mb-4");
+
+    document.getElementById('table-users').classList.add("d-block", "table-responsive", "w-100");
+
+    document.querySelector('.dataTables_info').classList.add("col-12","col-md-6", "text-muted", "mb-3", "mb-sm-4");
+
+    document.querySelector('.dataTables_paginate').classList.add("col-12","col-md-6", "mb-3", "mb-sm-4", "mt-md-4");
 
     /* ******************************************************************** */
     /* *** Validar Formulario ********************************************* */
     const inputs = document.querySelectorAll('#form-usuario .input');
-    // const user = JSON.parse(localStorage.getItem("loggedUser"));
+    
 
     const expressions = {
         text: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
