@@ -11,36 +11,101 @@ document.addEventListener('DOMContentLoaded', (e) => {
         });
     }
 
+    // const addProducts = (data) => {
+    //     const bodyTable = document.getElementById("body-table");
+    //     bodyTable.innerText = "";
+    //     data.map(({id, description, category, stock, price_unit, active, date_creation}) => {
+
+    //     let rowTable = [
+    //     `<tr id="productRow${id}" class="align-middle">
+    //         <td>${id}</td>
+    //         <td>${description}</td>
+    //         <td>${category}</td>
+    //         <td>${stock}</td>
+    //         <td>${price_unit}</td>
+    //         <td>${active}</td>
+    //         <td>${date_creation}</td>
+    //         <td>
+    //             <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
+    //                 <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+    //             </button>
+    //             <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
+    //                 <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
+    //             </button>
+    //         </td>
+    //     </tr>`
+    //     ].join('\n');
+    //     bodyTable.innerHTML= bodyTable.innerHTML + rowTable;
+    //     });
+
+    // }
+
+
     const addProducts = (data) => {
         const bodyTable = document.getElementById("body-table");
         bodyTable.innerText = "";
         data.map(({id, description, category, stock, price_unit, active, date_creation}) => {
 
         let rowTable = [
-        `<tr id="productRow${id}" class="align-middle">
-            <td>${id}</td>
-            <td>${description}</td>
-            <td>${category}</td>
-            <td>${stock}</td>
-            <td>${price_unit}</td>
-            <td>${active}</td>
-            <td>${date_creation}</td>
-            <td>
-                <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
-                    <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
-                </button>
-                <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
-                    <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
-                </button>
-            </td>
-        </tr>`
-        ].join('\n');
-        bodyTable.innerHTML= bodyTable.innerHTML + rowTable;
+            `<tr id="productRow${id}" class="align-middle">
+                <td>${id}</td>
+                <td>${description}</td>
+                <td>${category}</td>
+                <td>${stock}</td>
+                <td>${price_unit}</td>
+                <td>${active}</td>
+                <td>${date_creation}</td>
+                <td>
+                    <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
+                        <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+                    </button>
+                    <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
+                        <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
+                    </button>
+                </td>
+            </tr>`
+            ].join('\n');
+            dataTable.row.add($(rowTable)).draw();
         });
-
     }
 
     getToListProducts();
+
+    //Datatable 
+    let dataTable = new DataTable('#table-products',{
+        language: {
+            "decimal": "",
+            "emptyTable": "No hay información para mostrar",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+            "infoPostFix": "",
+            "thousands": ",",
+            "lengthMenu": "Mostrar _MENU_ Entradas",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
+        },
+        "lengthMenu": [5,10,15,20 ],
+        "dom": 'lBftip',
+        buttons: [
+            {
+                text: 
+                    +'<img src="./images/agregar.svg" class= "img-fluid me-1" alt="añadir">'
+                    +'<span class="d-none d-sm-inline">Agregar</span>',
+                className: "btnOpenAdd btn btn-agregar text-white fs-6"
+            }
+        ]
+    });
+    
+
 
 
     /* ******************************************************************** */
