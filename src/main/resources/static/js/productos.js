@@ -1,9 +1,15 @@
 document.addEventListener('DOMContentLoaded', (e) => {
+    
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+
+    /* *** Visitante o admin ************************************** */
+    const refAdmin = document.querySelector(".ref-admin");
+    (user["admin"]) 
+    ? refAdmin.innerText = 'Admin'
+    : refAdmin.innerText = 'Invitado';
 
     /* ******************************************************************** */
     /* *** Añadir Lista de Productos ************************************** */
-
-    const user = JSON.parse(localStorage.getItem("loggedUser"));
 
     const getToListProducts = () => {
         fetch('/api/product')
@@ -63,10 +69,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
 
         dataTable.row.add($(rowTable)).draw();
-        let rowCount = document.querySelector('#table-products tr').length;
-        const productsNumber = localStorage.setItem("productsNumber",rowCount);
-        console.log(productsNumber);
         });
+        
+
     }
 
     getToListProducts();
@@ -254,7 +259,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
         } 
         let rowList = Array.from(parentsBtnOpenEdit);
         for (let i = 0; i < rowList.length-1; i++) {
-            console.log(rowList[i].innerText)
             if (i > 0) {
                 if(inputsId[i] == 'inputActive' && rowList[i].innerText == 'true') {
                     document.getElementById(inputsId[i]).value = 1;
@@ -307,11 +311,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
             if (option == 'add'){
                 postToAddProduct(fieldValue);
             } else if (option == 'edit'){
-                console.log("editar");
                 putToUpdateProduct(fieldValue);
             }
         } else {
-            console.log("Completar campos");
             alertMessage("Por favor complete todos los campos correctamente","danger","exclamation-triangle-fill");
         }
     });
@@ -342,10 +344,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
             getToListProducts();
             formProduct.reset();
             productModal.hide();
-            console.log("Respuesta correcta");
         } else {
             alertMessage("Error al intentar agregar el producto","danger","exclamation-triangle-fill");
-            console.log("Respuesta incorrecta");
         }
         inputs.forEach((input) => input.classList.remove('border','border-success'));
     }
@@ -361,16 +361,13 @@ document.addEventListener('DOMContentLoaded', (e) => {
                 "Content-Type": "application/json"
             }
         });
-        console.log(JSON.stringify(bodyObject));
         if (response.ok) {
             alertMessage("Producto actualizado con éxito","success","check-circle-fill");
             getToListProducts();
             formProduct.reset();
             productModal.hide();
-            console.log("Respuesta correcta");
         } else {
             alertMessage("Error al intentar actualizar el producto","danger","exclamation-triangle-fill");
-            console.log("Respuesta incorrecta");
         }
         inputs.forEach((input) => input.classList.remove('border','border-success'));
     }
@@ -378,7 +375,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     //Método delete para eliminar el producto
     const deleteToRemoveProduct = async (id) => {
-        console.log(id);
         const url = "/api/product/" + id;
         const response = await fetch(url, {
             method: "DELETE"
@@ -388,10 +384,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
             alertMessage("Producto eliminado con éxito","success","check-circle-fill");
             getToListProducts();
             deleteModal.hide();
-            console.log("Respuesta correcta");
         } else {
             alertMessage("Error al intentar eliminar el producto","danger","exclamation-triangle-fill");
-            console.log("Respuesta incorrecta");
         }
     }
             

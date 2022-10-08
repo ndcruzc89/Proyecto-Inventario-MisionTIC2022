@@ -12,33 +12,14 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar sticky-top navbar-dark bg-dark navbar-expand-md">
+    <header class="navbar sticky-top navbar-dark bg-dark navbar-expand-md">
         <div class="container-fluid">
             <a href="#" class="navbar-brand ">
                 <img src="./images/inventario.png" class="img-fluid img_logo me-1" alt="inventario">
                 <span>INVENTARIOS</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="navbarNav" class="collapse navbar-collapse" >
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item pt-2 pe-md-2 pt-md-0 text-center">
-                        <a href="/" class="nav-link active" aria-current="page">
-                            <img src="./images/login.svg" class= "img-fluid me-1" alt="login">
-                            <span class="">Iniciar Sesión</span> 
-                        </a>
-                    </li>
-                    <li class="nav-item pt-2 pt-md-0">
-                        <a href="/registrarse" class="nav-link text-center">
-                            <img src="./images/registro.svg" class= "img-fluid me-1" alt="registro">
-                            <span class="">Registrarse</span> 
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </div>
-    </nav>
+    </header>
 
     <!-- MAIN -->
     <main>
@@ -64,33 +45,10 @@
                             </form>
                         </div>
                     </div>
-                    <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal">Olvidaste tu contraseña?</a>
-                    <!-- <p>No estás registrado? <a href="/registrarse" class="text-decoration-none">Crea tu cuenta</a></p> -->
                 </div>
             </div>
         </div>
     </main>
-
-    <!-- MODAL -> RECUPERAR CONTRASEÑA -->
-    <div id="loginModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-white">Recuperar contraseña</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail" class="form-label">Email registrado</label>
-                            <input type="email" class="form-control" id="exampleInputEmail" placeholder="name@example.com">
-                        </div>
-                        <button type="submit" class="btn text-white">Enviar</button>  
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     
     <script src="./js/bootstrap.min.js"></script>
     <script src="./js/index.js"></script> 

@@ -1,9 +1,16 @@
 document.addEventListener('DOMContentLoaded', (e) => {
 
+    const user = JSON.parse(localStorage.getItem("loggedUser"));
+
+    /* *** Visitante o admin ************************************** */
+    const refAdmin = document.querySelector(".ref-admin");
+    (user["admin"]) 
+    ? refAdmin.innerText = 'Admin'
+    : refAdmin.innerText = 'Invitado';
+
+
     /* ******************************************************************** */
     /* *** Añadir Lista de Productos ************************************** */
-
-    const user = JSON.parse(localStorage.getItem("loggedUser"));
 
     const getToListUsers = () => {
         fetch('/api/user')
@@ -61,6 +68,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                     </tr>`
                     ].join('\n');
             }
+
             dataTable.row.add($(rowTable)).draw();
         });
 
@@ -101,6 +109,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
         ]
     });
 
+    
+
     document.querySelector('.dataTables_wrapper').classList.add("row", "d-flex", "align-items-center", "justify-content-center");
 
     document.querySelector('.dataTables_length').classList.add("col-12","col-sm-5", "col-md-4", "mb-3", "mb-sm-4")
@@ -111,6 +121,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
     document.querySelector('.dt-buttons .btn').innerHTML = [
     `<img src="./images/agregar.svg" class= "img-fluid me-1" alt="añadir">
      <span class="">Agregar</span>`].join('');
+     (user["admin"])
+    ? document.querySelector('.dt-buttons .btn').disabled = false
+    : document.querySelector('.dt-buttons .btn').disabled = true;
 
     document.querySelector('.dataTables_filter').classList.add("col-12", "col-md-5", "mb-4");
 
