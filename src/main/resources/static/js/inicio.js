@@ -24,7 +24,5 @@ document.addEventListener('DOMContentLoaded', (e) => {
         regUsers.innerHTML = [`${data.length} registrados`].join('');
     });
 
-    
-    
 
 });

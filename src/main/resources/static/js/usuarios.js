@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     : refAdmin.innerText = 'Invitado';
 
 
-    /* ******************************************************************** */
-    /* *** Añadir Lista de Productos ************************************** */
+    /* *** Añadir Lista de Usuarios ************************************** */
 
     const getToListUsers = () => {
         fetch('/api/user')
@@ -110,7 +109,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
     });
 
     
-
     document.querySelector('.dataTables_wrapper').classList.add("row", "d-flex", "align-items-center", "justify-content-center");
 
     document.querySelector('.dataTables_length').classList.add("col-12","col-sm-5", "col-md-4", "mb-3", "mb-sm-4")
@@ -133,11 +131,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     document.querySelector('.dataTables_paginate').classList.add("col-12","col-md-6", "mb-3", "mb-sm-4", "mt-md-4");
 
-    /* ******************************************************************** */
+   
     /* *** Validar Formulario ********************************************* */
+
     const inputs = document.querySelectorAll('#form-usuario .input');
     
-
     const expressions = {
         text: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
         email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -163,7 +161,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
         "admin": null,
         "active": null
     }
-
 
     const validateForm = (e) => {
         switch (e.target.name) {
@@ -210,7 +207,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
             fieldState[inputName] = false;
         }
     };
-
 
     inputs.forEach((input) => {
         input.addEventListener('keyup', validateForm); //Tecla levantada
@@ -280,6 +276,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
     /* *** Botón para abrir el alert y confirmar la eliminación de usuario ************************************** */
+
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
     let idProduct = 0;
 
@@ -295,6 +292,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         deleteModal.show();
     });
 
+    // Botón para eliminar el usuario
     const btnDeleteUser = document.getElementById("btnDeleteUser")
     btnDeleteUser.addEventListener('click', ()=>{
         deleteToRemoveUser(idProduct);
@@ -326,7 +324,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
 
-    //Método post para agregar el usuario
+    /* *** Método post para agregar el usuario **************** */
     const postToAddUser = async (bodyObject) => {
         const url = "/api/user";
         const response = await fetch(url, {
@@ -349,7 +347,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
 
-    //Método post para agregar el usuario
+    /* *** Método put para agregar el usuario **************** */
     const putToUpdateUser = async (bodyObject) => {
         const url = "/api/user";
         const response = await fetch(url, {
@@ -371,7 +369,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
 
-    //Método delete para eliminar el usuario
+    /* *** Método delete para eliminar el usuario **************** */
     const deleteToRemoveUser = async (id) => {
         const url = "/api/user/" + id;
         const response = await fetch(url, {

@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
     ? refAdmin.innerText = 'Admin'
     : refAdmin.innerText = 'Invitado';
 
-    /* ******************************************************************** */
     /* *** Añadir Lista de Productos ************************************** */
 
     const getToListProducts = () => {
@@ -129,12 +128,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
     document.querySelector('.dataTables_paginate').classList.add("col-12","col-md-6", "mb-3", "mb-sm-4", "mt-md-4");
 
 
-
-    /* ******************************************************************** */
     /* *** Validar Formulario ********************************************* */
+
     const inputs = document.querySelectorAll('#form-producto .input');
     
-
     const expressions = {
         description: /^[a-zA-ZÀ-ÿ\s0-9\-]{1,40}$/, // Letras (pueden llevar acentos), números, espacios y guiones
         text: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -163,8 +160,6 @@ document.addEventListener('DOMContentLoaded', (e) => {
         "date_creation": null,
         "userId": user["id"]
     }
-
-    
 
     const validateForm = (e) => {
         switch (e.target.name) {
@@ -281,6 +276,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 
     /* *** Botón para abrir el alert y confirmar la eliminación de producto ************************************** */ 
+
     const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
     let idProduct = 0;
 
@@ -297,13 +293,13 @@ document.addEventListener('DOMContentLoaded', (e) => {
     });
 
 
-    /* *** Botón para eliminar el producto ************************************** */ 
+    // Botón para eliminar el producto
     const btnDeleteProduct = document.getElementById("btnDeleteProduct")
     btnDeleteProduct.addEventListener('click', (e)=>{
         deleteToRemoveProduct(idProduct);
     });
 
-    /* *** Enviar el producto agregado************************************** */
+    /* *** Enviar el producto agregado ************************************** */
     const formProduct = document.getElementById("form-producto");
     formProduct.addEventListener('submit', (e) => {
         e.preventDefault();     
@@ -328,7 +324,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
 
-    //Método post para agregar el producto
+    /* *** Método post para agregar el producto **************** */
     const postToAddProduct = async (bodyObject) => {
         const url = "/api/product";
         const response = await fetch(url, {
@@ -351,7 +347,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
 
-    //Método post para agregar el producto
+    /* *** Método put para agregar el producto **************** */
     const putToUpdateProduct = async (bodyObject) => {
         const url = "/api/product";
         const response = await fetch(url, {
@@ -373,7 +369,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     }
 
 
-    //Método delete para eliminar el producto
+    /* *** Método delete para eliminar el producto **************** */
     const deleteToRemoveProduct = async (id) => {
         const url = "/api/product/" + id;
         const response = await fetch(url, {

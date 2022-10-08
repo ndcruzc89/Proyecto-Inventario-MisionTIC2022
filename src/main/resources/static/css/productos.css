@@ -40,16 +40,9 @@
 .triangle-fill {
     color: #dc3545;
 }
-/* .modal-backdrop {
-    display: none;
-} */
 
 .alert {
     z-index: 1100;
     width: 56%;
     margin: auto;
 }
-
-/* #alert-message {
-    z-index: 1100;
-} */
