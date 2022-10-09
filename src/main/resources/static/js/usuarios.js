@@ -24,9 +24,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
         bodyTable.innerText = "";
         dataTable.clear();
         let rowTable = '';
+        let counter = 0;
         data.map(({id, name, lastName, email, password, admin, active}) => {
 
-            if (user["admin"]) {
+            if (counter == 0) {
                 rowTable = [
                     `<tr id="userRow${id}" class="align-middle">
                         <td>${id}</td>
@@ -40,34 +41,54 @@ document.addEventListener('DOMContentLoaded', (e) => {
                             <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
                                 <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
                             </button>
-                            <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
-                                <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
-                            </button>
                         </td>
                     </tr>`
                     ].join('\n');
             } else {
-                rowTable = [
-                    `<tr id="userRow${id}" class="align-middle">
-                        <td>${id}</td>
-                        <td>${name}</td>
-                        <td>${lastName}</td>
-                        <td>${email}</td>
-                        <td class="d-none">${password}</td>
-                        <td>${admin}</td>
-                        <td>${active}</td>
-                        <td>
-                            <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button" disabled>
-                                <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
-                            </button>
-                            <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button" disabled>
-                                <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
-                            </button>
-                        </td>
-                    </tr>`
-                    ].join('\n');
-            }
 
+                if (user["admin"]) {
+                    rowTable = [
+                        `<tr id="userRow${id}" class="align-middle">
+                            <td>${id}</td>
+                            <td>${name}</td>
+                            <td>${lastName}</td>
+                            <td>${email}</td>
+                            <td class="d-none">${password}</td>
+                            <td>${admin}</td>
+                            <td>${active}</td>
+                            <td>
+                                <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
+                                    <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+                                </button>
+                                <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button">
+                                    <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
+                                </button>
+                            </td>
+                        </tr>`
+                        ].join('\n');
+                } else {
+                    rowTable = [
+                        `<tr id="userRow${id}" class="align-middle">
+                            <td>${id}</td>
+                            <td>${name}</td>
+                            <td>${lastName}</td>
+                            <td>${email}</td>
+                            <td class="d-none">${password}</td>
+                            <td>${admin}</td>
+                            <td>${active}</td>
+                            <td>
+                                <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button" disabled>
+                                    <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+                                </button>
+                                <button id="btnOpenDelete${id}" class="btnOpenDelete btn btn-eliminar mb-2" type="button" disabled>
+                                    <img src="./images/eliminar.svg" class= "img-fluid imgBtnOpenDelete" alt="eliminar">
+                                </button>
+                            </td>
+                        </tr>`
+                        ].join('\n');
+                }
+            }
+            counter++;
             dataTable.row.add($(rowTable)).draw();
         });
 
