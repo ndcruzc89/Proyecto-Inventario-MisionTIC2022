@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
                             </td>
                         </tr>`
                         ].join('\n');
-                } else{
+                } else {
                     rowTable = [
                         `<tr id="userRow${id}" class="align-middle">
                             <td>${id}</td>
