@@ -28,22 +28,42 @@ document.addEventListener('DOMContentLoaded', (e) => {
         data.map(({id, name, lastName, email, password, admin, active}) => {
 
             if (counter == 0) {
-                rowTable = [
-                    `<tr id="userRow${id}" class="align-middle">
-                        <td>${id}</td>
-                        <td>${name}</td>
-                        <td>${lastName}</td>
-                        <td>${email}</td>
-                        <td class="d-none">${password}</td>
-                        <td>${admin}</td>
-                        <td>${active}</td>
-                        <td>
-                            <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
-                                <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
-                            </button>
-                        </td>
-                    </tr>`
-                    ].join('\n');
+                if (user["admin"]) {
+                    rowTable = [
+                        `<tr id="userRow${id}" class="align-middle">
+                            <td>${id}</td>
+                            <td>${name}</td>
+                            <td>${lastName}</td>
+                            <td>${email}</td>
+                            <td class="d-none">${password}</td>
+                            <td>${admin}</td>
+                            <td>${active}</td>
+                            <td>
+                                <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button">
+                                    <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+                                </button>
+                            </td>
+                        </tr>`
+                        ].join('\n');
+                } else{
+                    rowTable = [
+                        `<tr id="userRow${id}" class="align-middle">
+                            <td>${id}</td>
+                            <td>${name}</td>
+                            <td>${lastName}</td>
+                            <td>${email}</td>
+                            <td class="d-none">${password}</td>
+                            <td>${admin}</td>
+                            <td>${active}</td>
+                            <td>
+                                <button id="btnOpenEdit${id}" class="btnOpenEdit btn btn-editar me-2 mb-2" type="button" disabled>
+                                    <img src="./images/editar.svg" class= "img-fluid imgBtnOpenEdit" alt="editar">
+                                </button>
+                            </td>
+                        </tr>`
+                        ].join('\n');
+                }
+
             } else {
 
                 if (user["admin"]) {
