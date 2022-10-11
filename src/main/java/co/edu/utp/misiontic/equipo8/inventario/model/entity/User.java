@@ -37,7 +37,7 @@ public class User {
     @Column(name = "contrasena", nullable = false, length = 50)
     private String password;
 
-    @Column(name = "administrador", nullable = false, length = 20)
+    @Column(name = "administrador", nullable = false)
     private Boolean admin;
 
     @Column(name = "activo", nullable = false)
